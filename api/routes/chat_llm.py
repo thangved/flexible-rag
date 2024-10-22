@@ -56,6 +56,7 @@ def transform_message(message: ChatMessage):
         return AIMessage(content=message.content)
     if message.role == ChatMessageRole.System:
         return SystemMessage(content=message.content)
+    raise ValueError(f"Invalid message role: {message.role}")
 
 
 @router.post(
