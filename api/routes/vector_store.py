@@ -16,6 +16,15 @@ router = APIRouter(
 
 
 class AddDocumentInput(BaseModel):
+    """
+    Add Document Input
+
+    Attributes:
+        content (str): Document content
+        collection_name (str): Collection name
+        reference_id (str): Reference ID
+    """
+
     model_config = {
         "title": "Add Document Input",
         "strict": True,
@@ -41,6 +50,13 @@ class AddDocumentInput(BaseModel):
 
 
 class AddDocumentResponse(BaseModel):
+    """
+    Add Document Response
+
+    Attributes:
+        ids (list[str]): List of unique document IDs
+    """
+
     model_config = {
         "title": "Add Document Response",
         "strict": True,
@@ -54,6 +70,13 @@ class AddDocumentResponse(BaseModel):
 
 
 class DocumentWithScoreMetadata(BaseModel):
+    """
+    Metadata for Document with Score
+
+    Attributes:
+        reference_id (str): Reference ID
+    """
+
     model_config = {
         "title": "Document with Score Metadata",
         "strict": True,
@@ -67,6 +90,15 @@ class DocumentWithScoreMetadata(BaseModel):
 
 
 class DocumentWithScore(BaseModel):
+    """
+    Document with Score
+
+    Attributes:
+        page_content (str): Page content
+        metadata (DocumentWithScoreMetadata): Metadata
+        score (float): Score
+    """
+
     model_config = {
         "title": "Document with Score",
         "strict": True,
