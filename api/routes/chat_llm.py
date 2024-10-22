@@ -49,9 +49,7 @@ class ChatOutput(BaseModel):
     )
 
 
-def transform_message(
-    message: Annotated[ChatMessage, "Chat Message"]
-) -> Annotated[Message, "Message"]:
+def transform_message(message: Annotated[ChatMessage, "Chat Message"]):
     """
     Transform a chat message to a message object
 
@@ -59,7 +57,7 @@ def transform_message(
         message (ChatMessage): Chat message
 
     Returns:
-        Message: Message object
+        BaseMessage: Message object
     """
     if message.role == ChatMessageRole.Human:
         return HumanMessage(content=message.content)
