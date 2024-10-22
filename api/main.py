@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from .routes import vector_store
 
 app = FastAPI(
