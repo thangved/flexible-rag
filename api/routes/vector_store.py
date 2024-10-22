@@ -97,18 +97,18 @@ class DocumentWithScore(BaseModel):
     name="Add Document",
     response_description="Document added",
 )
-def create_vector(
-    input: Annotated[AddDocumentInput, "Add Document Input"],
+def create_document(
+    document: Annotated[AddDocumentInput, "Add Document Input"],
     chroma_client: Annotated[chromadb.Client, Depends(chroma_client)],
     cohere_embeddings: Annotated[Embeddings, Depends(cohere_embeddings)],
 ) -> Annotated[AddDocumentResponse, "Document added"]:
     vector_store = VectorStore(
-        collection_name=input.collection_name,
+        collection_name=document.collection_name,
         client=chroma_client,
         embeddings=cohere_embeddings,
     )
     ids = vector_store.add_documents(
-        [Document(page_content=input.content)], reference_id=input.reference_id
+        [Document(page_content=document.content)], reference_id=document.reference_id
     )
     return AddDocumentResponse(ids=ids)
 
