@@ -16,7 +16,10 @@ def get_chroma_client() -> chromadb.Client:
     Returns:
         chromadb.Client: Chroma client
     """
-    return chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
+    return chromadb.HttpClient(
+        host=CHROMA_HOST,
+        port=CHROMA_PORT,
+    )
 
 
 def get_cohere_embeddings():

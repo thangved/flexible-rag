@@ -10,8 +10,9 @@ app = FastAPI(
         "url": "https://thangved.com",
     },
     description=(
-        "Implemented a RAG (Retrieval-Augmented Generation) with common APIs, without any specific task in mind."
-        " This is a flexible RAG that can be used for any task with a simple configuration."
+        "Implemented a RAG (Retrieval-Augmented Generation) with common APIs, without"
+        " any specific task in mind. This is a flexible RAG that can be used for any"
+        " task with a simple configuration."
     ),
     title="Flexible RAG API",
     summary="Flexible RAG API",

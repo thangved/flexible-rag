@@ -11,7 +11,10 @@ from core.vector_store import VectorStore
 from ..dependencies import get_chroma_client, get_cohere_embeddings
 
 router = APIRouter(
-    dependencies=[Depends(get_chroma_client), Depends(get_cohere_embeddings)],
+    dependencies=[
+        Depends(get_chroma_client),
+        Depends(get_cohere_embeddings),
+    ],
 )
 
 
@@ -130,10 +133,22 @@ class DocumentWithScore(BaseModel):
     response_description="Document added",
 )
 def create_document(
-    document: Annotated[AddDocumentInput, "Add Document Input"],
-    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
-    cohere_embeddings: Annotated[Embeddings, Depends(get_cohere_embeddings)],
-) -> Annotated[AddDocumentResponse, "Document added"]:
+    document: Annotated[
+        AddDocumentInput,
+        "Add Document Input",
+    ],
+    chroma_client: Annotated[
+        chromadb.Client,
+        Depends(get_chroma_client),
+    ],
+    cohere_embeddings: Annotated[
+        Embeddings,
+        Depends(get_cohere_embeddings),
+    ],
+) -> Annotated[
+    AddDocumentResponse,
+    "Document added",
+]:
     """
     Add a document to the vector store
 
@@ -151,7 +166,8 @@ def create_document(
         embeddings=cohere_embeddings,
     )
     ids = vector_store.add_documents(
-        [Document(page_content=document.content)], reference_id=document.reference_id
+        [Document(page_content=document.content)],
+        reference_id=document.reference_id,
     )
     return AddDocumentResponse(ids=ids)
 
@@ -164,13 +180,34 @@ def create_document(
     response_description="List of similar documents",
 )
 def similarity_search(
-    collection_name: Annotated[str, "Collection name"],
-    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
-    cohere_embeddings: Annotated[Embeddings, Depends(get_cohere_embeddings)],
-    query: Annotated[str, "Query string"] = "Hoàng Sa và Trường Sa là của ai?",
-    k: Annotated[int, "Number of documents to return"] = 10,
-    reference_id: Annotated[Optional[str], "Reference ID"] = None,
-) -> Annotated[List[DocumentWithScore], "List of similar documents"]:
+    collection_name: Annotated[
+        str,
+        "Collection name",
+    ],
+    chroma_client: Annotated[
+        chromadb.Client,
+        Depends(get_chroma_client),
+    ],
+    cohere_embeddings: Annotated[
+        Embeddings,
+        Depends(get_cohere_embeddings),
+    ],
+    query: Annotated[
+        str,
+        "Query string",
+    ] = "Hoàng Sa và Trường Sa là của ai?",
+    k: Annotated[
+        int,
+        "Number of documents to return",
+    ] = 10,
+    reference_id: Annotated[
+        Optional[str],
+        "Reference ID",
+    ] = None,
+) -> Annotated[
+    List[DocumentWithScore],
+    "List of similar documents",
+]:
     """
     Search for similar documents
 
@@ -190,7 +227,11 @@ def similarity_search(
         client=chroma_client,
         embeddings=cohere_embeddings,
     )
-    docs = vector_store.similarity_search(query=query, reference_id=reference_id, k=k)
+    docs = vector_store.similarity_search(
+        query=query,
+        reference_id=reference_id,
+        k=k,
+    )
     return [
         DocumentWithScore(
             page_content=doc[0].page_content,
@@ -210,10 +251,22 @@ def similarity_search(
     response_description="No content",
 )
 def delete_documents_by_reference_id(
-    reference_id: Annotated[str, "Reference ID"],
-    collection_name: Annotated[str, "Collection name"],
-    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
-) -> Annotated[None, "No content"]:
+    reference_id: Annotated[
+        str,
+        "Reference ID",
+    ],
+    collection_name: Annotated[
+        str,
+        "Collection name",
+    ],
+    chroma_client: Annotated[
+        chromadb.Client,
+        Depends(get_chroma_client),
+    ],
+) -> Annotated[
+    None,
+    "No content",
+]:
     """
     Delete documents by reference ID
 

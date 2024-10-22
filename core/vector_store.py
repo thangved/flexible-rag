@@ -17,11 +17,16 @@ class VectorStore:
     def __init__(
         self,
         collection_name: Annotated[
-            Optional[str], "Collection name"
+            Optional[str],
+            "Collection name",
         ] = "default_collection",
-        client: Annotated[Optional[chromadb.Client], "Chroma client"] = None,
+        client: Annotated[
+            Optional[chromadb.Client],
+            "Chroma client",
+        ] = None,
         embeddings: Annotated[
-            Optional[Embeddings], "Embeddings function"
+            Optional[Embeddings],
+            "Embeddings function",
         ] = FakeEmbeddings(size=768),
     ):
         """
@@ -39,9 +44,18 @@ class VectorStore:
 
     def add_documents(
         self,
-        documents: Annotated[list[Document], "List of documents"],
-        reference_id: Annotated[Optional[str], "Reference ID"] = None,
-    ) -> Annotated[list[str], "List of document IDs"]:
+        documents: Annotated[
+            list[Document],
+            "List of documents",
+        ],
+        reference_id: Annotated[
+            Optional[str],
+            "Reference ID",
+        ] = None,
+    ) -> Annotated[
+        list[str],
+        "List of document IDs",
+    ]:
         """
         Add documents to the vector store
 
@@ -59,9 +73,18 @@ class VectorStore:
 
     def similarity_search(
         self,
-        query: Annotated[str, "Query string"],
-        reference_id: Annotated[Optional[str], "Reference ID"] = None,
-        k: Annotated[int, "Number of result documents"] = 3,
+        query: Annotated[
+            str,
+            "Query string",
+        ],
+        reference_id: Annotated[
+            Optional[str],
+            "Reference ID",
+        ] = None,
+        k: Annotated[
+            int,
+            "Number of result documents",
+        ] = 3,
     ) -> list[Document]:
         """
         Search for similar documents
@@ -86,7 +109,10 @@ class VectorStore:
 
     def delete_by_reference_id(
         self,
-        reference_id: Annotated[str, "Reference ID"],
+        reference_id: Annotated[
+            str,
+            "Reference ID",
+        ],
     ) -> None:
         """
         Delete documents by reference_id
