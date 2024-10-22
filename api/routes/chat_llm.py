@@ -13,12 +13,29 @@ router = APIRouter(dependencies=[Depends(get_chat_model)])
 
 
 class ChatMessageRole(str, Enum):
+    """
+    Role of the message
+
+    Attributes:
+        Human (str): Human role
+        Ai (str): AI role
+        System (str): System role
+    """
+
     Human = "human"
     Ai = "ai"
     System = "system"
 
 
 class ChatMessage(BaseModel):
+    """
+    Chat message
+
+    Attributes:
+        role (ChatMessageRole): Role of the message
+        content (str): Content of the message
+    """
+
     role: ChatMessageRole = Field(
         ...,
         title="Role of the message",
@@ -33,6 +50,13 @@ class ChatMessage(BaseModel):
 
 
 class ChatInput(BaseModel):
+    """
+    Chat input
+
+    Attributes:
+        messages (list[ChatMessage]): Messages
+    """
+
     messages: list[ChatMessage] = Field(
         ...,
         title="Messages",
@@ -41,6 +65,13 @@ class ChatInput(BaseModel):
 
 
 class ChatOutput(BaseModel):
+    """
+    Chat output
+
+    Attributes:
+        content (str): Content of the message
+    """
+
     content: str = Field(
         ...,
         title="Content of the message",
