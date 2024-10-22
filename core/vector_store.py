@@ -29,9 +29,11 @@ class VectorStore:
         reference_id: Annotated[Optional[str], "Reference ID"] = None,
         k: Annotated[int, "Number of result documents"] = 3,
     ) -> list[Document]:
-        filter = {"reference_id": reference_id} if reference_id is not None else None
+        query_filter = (
+            {"reference_id": reference_id} if reference_id is not None else None
+        )
         docs_with_scores = self.chroma.similarity_search_with_score(
-            query=query, k=k, filter=filter
+            query=query, k=k, filter=query_filter
         )
         return [doc[0] for doc in docs_with_scores]
 
