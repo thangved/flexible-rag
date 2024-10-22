@@ -10,8 +10,8 @@ class ChatLLM:
     ) -> None:
         self.chat_model = chat_model
 
-    def chat(self, input: Annotated[LanguageModelInput, "Chat Input"]) -> str:
-        res = self.chat_model.invoke(input=input)
+    def chat(self, chat_input: Annotated[LanguageModelInput, "Chat Input"]) -> str:
+        res = self.chat_model.invoke(input=chat_input)
         if type(res.content) is str:
             return res.content
         return "\n".join([s for s in res.content if type(s) is str])

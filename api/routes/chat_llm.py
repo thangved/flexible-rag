@@ -77,7 +77,7 @@ def chat(
     Returns:
         ChatOutput: Chat output
     """
-    messages = [transform_message(message) for message in chat_input.messages]
     chat_llm = ChatLLM(chat_model=chat_model)
-    res = chat_llm.chat(messages)
+    chat_input = [transform_message(message) for message in chat_input.messages]
+    res = chat_llm.chat(chat_input=chat_input)
     return ChatOutput(content=res)
