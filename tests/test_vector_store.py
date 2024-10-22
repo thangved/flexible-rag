@@ -2,13 +2,11 @@ from langchain_core.documents import Document
 
 from core.vector_store import VectorStore
 
-vector_store = None
-
 collection_name = "test_collection"
+vector_store = VectorStore(collection_name=collection_name)
 
 
 def test_create_vector_store_instance():
-    global vector_store
     vector_store = VectorStore(collection_name=collection_name)
     assert vector_store.chroma._collection_name == collection_name
 
