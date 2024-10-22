@@ -12,10 +12,11 @@ def test_create_vector_store_instance():
 
 
 def test_add_documents():
-    doc_1 = Document(page_content="test content 1", metadata={"reference_id": "1"})
-    doc_2 = Document(page_content="test content 2", metadata={"reference_id": "2"})
+    doc_1 = Document(page_content="test content 1")
+    doc_2 = Document(page_content="test content 2")
 
-    vector_store.add_documents([doc_1, doc_2])
+    vector_store.add_documents([doc_1], reference_id="1")
+    vector_store.add_documents([doc_2], reference_id="2")
 
 
 def test_similarity_search():
