@@ -15,7 +15,7 @@ print(f"CHROMA_HOST: {CHROMA_HOST}")
 print(f"CHROMA_PORT: {CHROMA_PORT}")
 
 
-def chroma_client() -> chromadb.Client:
+def get_chroma_client() -> chromadb.Client:
     """
     Creates a Chroma client to connect to the Chroma server.
 
@@ -25,7 +25,7 @@ def chroma_client() -> chromadb.Client:
     return chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
 
 
-def cohere_embeddings():
+def get_cohere_embeddings():
     """
     Creates a Cohere embeddings function.
 

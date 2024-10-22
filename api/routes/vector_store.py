@@ -8,10 +8,10 @@ from pydantic import BaseModel, Field
 
 from core.vector_store import VectorStore
 
-from ..dependencies import chroma_client, cohere_embeddings
+from ..dependencies import get_chroma_client, get_cohere_embeddings
 
 router = APIRouter(
-    dependencies=[Depends(chroma_client), Depends(cohere_embeddings)],
+    dependencies=[Depends(get_chroma_client), Depends(get_cohere_embeddings)],
 )
 
 
@@ -99,8 +99,8 @@ class DocumentWithScore(BaseModel):
 )
 def create_document(
     document: Annotated[AddDocumentInput, "Add Document Input"],
-    chroma_client: Annotated[chromadb.Client, Depends(chroma_client)],
-    cohere_embeddings: Annotated[Embeddings, Depends(cohere_embeddings)],
+    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
+    cohere_embeddings: Annotated[Embeddings, Depends(get_cohere_embeddings)],
 ) -> Annotated[AddDocumentResponse, "Document added"]:
     vector_store = VectorStore(
         collection_name=document.collection_name,
@@ -116,8 +116,8 @@ def create_document(
 @router.get("/")
 def similarity_search(
     collection_name: Annotated[str, "Collection name"],
-    chroma_client: Annotated[chromadb.Client, Depends(chroma_client)],
-    cohere_embeddings: Annotated[Embeddings, Depends(cohere_embeddings)],
+    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
+    cohere_embeddings: Annotated[Embeddings, Depends(get_cohere_embeddings)],
     query: Annotated[str, "Query string"] = "Hoàng Sa và Trường Sa là của ai?",
     k: Annotated[int, "Number of documents to return"] = 10,
     reference_id: Annotated[Optional[str], "Reference ID"] = None,
@@ -144,7 +144,7 @@ def similarity_search(
 def delete_documents_by_reference_id(
     reference_id: Annotated[str, "Reference ID"],
     collection_name: Annotated[str, "Collection name"],
-    chroma_client: Annotated[chromadb.Client, Depends(chroma_client)],
+    chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
 ) -> Annotated[None, "No content"]:
     vector_store = VectorStore(
         collection_name=collection_name,
