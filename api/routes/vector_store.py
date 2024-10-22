@@ -126,7 +126,7 @@ class DocumentWithScore(BaseModel):
 
 
 @router.post(
-    "/",
+    "",
     description="Add a document to the vector store",
     summary="Add a document to the vector store",
     name="Add Document",
@@ -173,7 +173,7 @@ def create_document(
 
 
 @router.get(
-    "/",
+    "",
     name="Similarity Search",
     description="Search for similar documents",
     summary="Search for similar documents",
