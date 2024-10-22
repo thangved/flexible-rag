@@ -102,6 +102,17 @@ def create_document(
     chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
     cohere_embeddings: Annotated[Embeddings, Depends(get_cohere_embeddings)],
 ) -> Annotated[AddDocumentResponse, "Document added"]:
+    """
+    Add a document to the vector store
+
+    Args:
+        document (AddDocumentInput): Add Document Input
+        chroma_client (chromadb.Client): Chroma client
+        cohere_embeddings (Embeddings): Embeddings function
+
+    Returns:
+        AddDocumentResponse: Document added
+    """
     vector_store = VectorStore(
         collection_name=document.collection_name,
         client=chroma_client,
@@ -113,7 +124,13 @@ def create_document(
     return AddDocumentResponse(ids=ids)
 
 
-@router.get("/")
+@router.get(
+    "/",
+    name="Similarity Search",
+    description="Search for similar documents",
+    summary="Search for similar documents",
+    response_description="List of similar documents",
+)
 def similarity_search(
     collection_name: Annotated[str, "Collection name"],
     chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
@@ -122,6 +139,20 @@ def similarity_search(
     k: Annotated[int, "Number of documents to return"] = 10,
     reference_id: Annotated[Optional[str], "Reference ID"] = None,
 ) -> Annotated[List[DocumentWithScore], "List of similar documents"]:
+    """
+    Search for similar documents
+
+    Args:
+        collection_name (str): Collection name
+        chroma_client (chromadb.Client): Chroma client
+        cohere_embeddings (Embeddings): Embeddings function
+        query (str): Query string
+        k (int): Number of documents to return
+        reference_id (str): Reference ID
+
+    Returns:
+        List[DocumentWithScore]: List of similar documents
+    """
     vector_store = VectorStore(
         collection_name=collection_name,
         client=chroma_client,
@@ -140,12 +171,28 @@ def similarity_search(
     ]
 
 
-@router.delete("/{reference_id}")
+@router.delete(
+    "/{reference_id}",
+    description="Delete documents by reference ID",
+    summary="Delete documents by reference ID",
+    response_description="No content",
+)
 def delete_documents_by_reference_id(
     reference_id: Annotated[str, "Reference ID"],
     collection_name: Annotated[str, "Collection name"],
     chroma_client: Annotated[chromadb.Client, Depends(get_chroma_client)],
 ) -> Annotated[None, "No content"]:
+    """
+    Delete documents by reference ID
+
+    Args:
+        reference_id (str): Reference ID
+        collection_name (str): Collection name
+        chroma_client (chromadb.Client): Chroma client
+
+    Returns:
+        None: No content
+    """
     vector_store = VectorStore(
         collection_name=collection_name,
         client=chroma_client,
