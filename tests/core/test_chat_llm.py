@@ -11,17 +11,13 @@ chat_model = FakeListChatModel(
 
 
 def test_create_chat_llm():
-    """
-    Test create ChatLLM
-    """
+    """Test create ChatLLM"""
     chat_llm = ChatLLM(chat_model=chat_model)
     assert chat_llm is not None
 
 
 def test_chat():
-    """
-    Test chat method
-    """
+    """Test chat method"""
     chat_llm = ChatLLM(chat_model=chat_model)
     messages = [
         HumanMessage(
