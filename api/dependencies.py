@@ -1,5 +1,5 @@
 import chromadb
-from langchain_cohere import CohereEmbeddings
+from langchain_cohere import ChatCohere, CohereEmbeddings
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
@@ -22,7 +22,7 @@ def get_chroma_client() -> chromadb.Client:
     )
 
 
-def get_cohere_embeddings():
+def get_cohere_embeddings() -> CohereEmbeddings:
     """
     Creates a Cohere embeddings function.
 
@@ -33,3 +33,13 @@ def get_cohere_embeddings():
         cohere_api_key=COHERE_API_KEY,
         model="embed-multilingual-v3.0",
     )
+
+
+def get_chat_model() -> ChatCohere:
+    """
+    Creates a chat model.
+
+    Returns:
+        ChatCohere: Chat model
+    """
+    return ChatCohere()

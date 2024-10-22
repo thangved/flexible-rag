@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .routes import vector_store
+from .routes import chat_llm, vector_store
 
 app = FastAPI(
     root_path="/api/v1",
@@ -21,7 +21,13 @@ app = FastAPI(
 
 
 app.include_router(
-    vector_store.router,
+    router=vector_store.router,
     prefix="/vector_store",
     tags=["Vector Store"],
+)
+
+app.include_router(
+    router=chat_llm.router,
+    prefix="/chat_llm",
+    tags=["Chat LLM"],
 )
