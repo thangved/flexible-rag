@@ -14,11 +14,18 @@ python = "^3.9"
 [tool.poetry.group.core.dependencies]
 langchain-core = "^0.3.12"
 langchain-chroma = ">=0.1.2"
+pydantic = "^2.9.2"
+langchain-cohere = "^0.3.1"
 
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
+
+
+
+[tool.poetry.group.api.dependencies]
+fastapi = {extras = ["standard"], version = "^0.115.2"}
 
 [build-system]
 requires = ["poetry-core"]

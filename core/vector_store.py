@@ -1,8 +1,9 @@
 from typing import Annotated, Optional
 
+import chromadb
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
-from langchain_core.embeddings import FakeEmbeddings
+from langchain_core.embeddings import Embeddings, FakeEmbeddings
 
 
 class VectorStore:
@@ -18,6 +19,10 @@ class VectorStore:
         collection_name: Annotated[
             Optional[str], "Collection name"
         ] = "default_collection",
+        client: Annotated[Optional[chromadb.Client], "Chroma client"] = None,
+        embeddings: Annotated[
+            Optional[Embeddings], "Embeddings function"
+        ] = FakeEmbeddings(size=768),
     ):
         """
         Initialize the vector store
@@ -25,17 +30,18 @@ class VectorStore:
         Args:
             collection_name (str): Collection name
         """
-        embeddings = FakeEmbeddings(size=4096)
         self.chroma = Chroma(
             collection_name=collection_name,
             embedding_function=embeddings,
+            client=client,
+            collection_metadata={"hnsw:space": "cosine"},
         )
 
     def add_documents(
         self,
         documents: Annotated[list[Document], "List of documents"],
         reference_id: Annotated[Optional[str], "Reference ID"] = None,
-    ) -> None:
+    ) -> Annotated[list[str], "List of document IDs"]:
         """
         Add documents to the vector store
 
@@ -43,13 +49,13 @@ class VectorStore:
             documents (list[Document]): List of documents
 
         Returns:
-            None
+            list[str]: List of document IDs
         """
         if reference_id is not None:
             for doc in documents:
                 doc.metadata["reference_id"] = reference_id
 
-        self.chroma.add_documents(documents=documents)
+        return self.chroma.add_documents(documents=documents)
 
     def similarity_search(
         self,
@@ -72,9 +78,11 @@ class VectorStore:
             {"reference_id": reference_id} if reference_id is not None else None
         )
         docs_with_scores = self.chroma.similarity_search_with_score(
-            query=query, k=k, filter=query_filter
+            query=query,
+            k=k,
+            filter=query_filter,
         )
-        return [doc[0] for doc in docs_with_scores]
+        return docs_with_scores
 
     def delete_by_reference_id(
         self,
@@ -90,4 +98,6 @@ class VectorStore:
             None
         """
         docs = self.chroma.get(where={"reference_id": reference_id})
-        self.chroma.delete(ids=docs["ids"])
+        ids = docs["ids"]
+        if len(ids) > 0:
+            self.chroma.delete(ids=docs["ids"])

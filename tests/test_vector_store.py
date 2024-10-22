@@ -26,14 +26,17 @@ def test_similarity_search():
 
     assert len(docs) == 2
 
-    for doc in docs:
+    for doc, score in docs:
         assert doc.metadata["reference_id"] in ["1", "2"]
+        assert type(score) == float
 
-    for doc in docs_1:
+    for doc, score in docs_1:
         assert doc.metadata["reference_id"] == "1"
+        assert type(score) == float
 
-    for doc in docs_2:
+    for doc, score in docs_2:
         assert doc.metadata["reference_id"] == "2"
+        assert type(score) == float
 
 
 def test_delete_by_reference_id():
