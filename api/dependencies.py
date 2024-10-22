@@ -1,13 +1,7 @@
-import os
-
 import chromadb
 from langchain_cohere import CohereEmbeddings
 
-COHERE_API_KEY = os.getenv("COHERE_API_KEY", "")
-
-CHROMA_HOST = os.getenv("CHROMA_HOST", "localhost")
-CHROMA_PORT = os.getenv("CHROMA_PORT", 8080)
-
+from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
 print(f"COHERE_API_KEY: {len(COHERE_API_KEY) * '*'}")
 
