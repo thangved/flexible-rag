@@ -1,6 +1,4 @@
-from fastapi import Depends, FastAPI
-
-from .dependencies import chroma_client, cohere_embeddings
+from fastapi import FastAPI
 from .routes import vector_store
 
 app = FastAPI(
