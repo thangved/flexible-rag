@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .routes import chat_llm, vector_store
+from .routes import chat_llm, rerank, vector_store
 
 app = FastAPI(
     root_path="/api/v1",
@@ -30,4 +30,10 @@ app.include_router(
     router=chat_llm.router,
     prefix="/chat_llm",
     tags=["Chat LLM"],
+)
+
+app.include_router(
+    router=rerank.router,
+    prefix="/rerank",
+    tags=["Rerank"],
 )
