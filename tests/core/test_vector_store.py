@@ -1,5 +1,3 @@
-from langchain_core.documents import Document
-
 from core.vector_store import VectorStore
 
 collection_name = "test_collection"

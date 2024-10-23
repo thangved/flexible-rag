@@ -2,13 +2,11 @@ from typing import Annotated, List, Optional
 
 import chromadb
 from fastapi import APIRouter, Depends, Response, status
-from langchain_core.documents import Document
-from langchain_core.embeddings import Embeddings
 from pydantic import BaseModel, Field
 
 from core.vector_store import VectorStore
 
-from ..dependencies import get_chroma_client, get_cohere_embeddings
+from ..dependencies import CohereEmbeddings, get_chroma_client, get_cohere_embeddings
 
 router = APIRouter(
     dependencies=[
@@ -68,7 +66,7 @@ class AddDocumentResponse(BaseModel):
         ...,
         description="A list of unique document IDs",
         title="Stored document IDs",
-        examples=["cab7e246-b777-4e8c-a88b-0ce9bd44e190"],
+        examples=["Uj9uY4N41cpSZb0MHBY_w"],
     )
 
 
@@ -142,7 +140,7 @@ def create_document(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        Embeddings,
+        CohereEmbeddings,
         Depends(get_cohere_embeddings),
     ],
 ) -> Annotated[
@@ -166,7 +164,7 @@ def create_document(
         embeddings=cohere_embeddings,
     )
     ids = vector_store.add_documents(
-        [Document(page_content=document.content)],
+        [document.content],
         reference_id=document.reference_id,
     )
     return AddDocumentResponse(ids=ids)
@@ -189,7 +187,7 @@ def similarity_search(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        Embeddings,
+        CohereEmbeddings,
         Depends(get_cohere_embeddings),
     ],
     query: Annotated[

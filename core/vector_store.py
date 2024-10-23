@@ -5,8 +5,6 @@ import chromadb.api
 import chromadb.api.client
 import nanoid
 from chromadb.utils import embedding_functions
-from langchain_chroma import Chroma
-from langchain_core.embeddings import Embeddings, FakeEmbeddings
 from pydantic import BaseModel, Field
 
 
@@ -43,7 +41,9 @@ class VectorStore:
             collection_name (str): Collection name
         """
         self.collection = client.get_or_create_collection(
-            name=collection_name, embedding_function=embeddings
+            name=collection_name,
+            embedding_function=embeddings,
+            metadata={"hnsw:space": "cosine"},
         )
 
     def add_documents(
@@ -125,7 +125,7 @@ class VectorStore:
                     page_content=res["documents"][0][i],
                     metadata=res["metadatas"][0][i],
                 ),
-                res["distances"][0][i],
+                res["distances"][0][i] / 100,
             )
             for i in range(len(res["documents"][0]))
         ]

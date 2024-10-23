@@ -2,7 +2,6 @@ import chromadb
 import pytest
 from chromadb.utils import embedding_functions
 from httpx import ASGITransport, AsyncClient
-from langchain_core.embeddings import FakeEmbeddings
 
 from api.dependencies import get_chroma_client, get_cohere_embeddings
 from api.main import app

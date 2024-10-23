@@ -1,5 +1,7 @@
 import chromadb
-from langchain_cohere import ChatCohere, CohereEmbeddings
+import cohere
+from chromadb import Documents, EmbeddingFunction, Embeddings
+from langchain_cohere import ChatCohere
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
@@ -22,6 +24,15 @@ def get_chroma_client() -> chromadb.Client:
     )
 
 
+class CohereEmbeddings(EmbeddingFunction):
+    def __call__(self, input: Documents) -> Embeddings:
+        co = cohere.Client(api_key=COHERE_API_KEY)
+        response = co.embed(
+            texts=input, model="embed-multilingual-v2.0", input_type="search_document"
+        )
+        return response.embeddings
+
+
 def get_cohere_embeddings() -> CohereEmbeddings:
     """
     Creates a Cohere embeddings function.
@@ -31,7 +42,6 @@ def get_cohere_embeddings() -> CohereEmbeddings:
     """
     return CohereEmbeddings(
         cohere_api_key=COHERE_API_KEY,
-        model="embed-multilingual-v3.0",
     )
 
 
