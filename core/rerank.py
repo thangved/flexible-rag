@@ -19,7 +19,7 @@ class RerankModel(ABC):
             docs (List[str]): List of documents
 
             Returns:
-                List[float]: List of relevance scores for each document with the query
+                List[float]: List of relevance scores
         """
 
 
