@@ -9,13 +9,13 @@ from core.vector_store import VectorStore
 from ..dependencies import (
     CohereEmbeddingsFunction,
     get_chroma_client,
-    get_cohere_embeddings,
+    get_embeddings_function,
 )
 
 router = APIRouter(
     dependencies=[
         Depends(get_chroma_client),
-        Depends(get_cohere_embeddings),
+        Depends(get_embeddings_function),
     ],
 )
 
@@ -145,7 +145,7 @@ def create_document(
     ],
     cohere_embeddings: Annotated[
         CohereEmbeddingsFunction,
-        Depends(get_cohere_embeddings),
+        Depends(get_embeddings_function),
     ],
 ) -> Annotated[
     AddDocumentResponse,
@@ -192,7 +192,7 @@ def similarity_search(
     ],
     cohere_embeddings: Annotated[
         CohereEmbeddingsFunction,
-        Depends(get_cohere_embeddings),
+        Depends(get_embeddings_function),
     ],
     query: Annotated[
         str,

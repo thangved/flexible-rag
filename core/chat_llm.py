@@ -1,6 +1,45 @@
+from abc import ABC, abstractmethod
 from typing import Annotated
 
-from langchain_core.language_models import BaseChatModel, LanguageModelInput
+from pydantic import BaseModel, Field
+
+from core.models.chat import ChatMessage
+
+
+class ChatInput(BaseModel):
+    """
+    Chat input
+
+    Attributes:
+        messages (list[ChatMessage]): Messages
+    """
+
+    messages: list[ChatMessage] = Field(
+        ...,
+        title="Messages",
+        description="Messages",
+    )
+
+
+class ChatLLMModel(ABC):
+    """
+    Chat with a language model
+
+    Attributes:
+        chat_model (BaseChatModel): A chat model
+    """
+
+    @abstractmethod
+    def chat(self, chat_input: Annotated[ChatInput, "Chat Input"]) -> str:
+        """
+        Chat with the chat model
+
+        Args:
+            chat_input (LanguageModelInput): Chat input
+
+        Returns:
+            str: Chat output
+        """
 
 
 class ChatLLM:
@@ -13,7 +52,7 @@ class ChatLLM:
 
     def __init__(
         self,
-        chat_model: Annotated[BaseChatModel, "A chat model"],
+        chat_model: Annotated[ChatLLMModel, "A chat model"],
     ) -> None:
         """
         Create a ChatLLM
@@ -23,7 +62,7 @@ class ChatLLM:
         """
         self.chat_model = chat_model
 
-    def chat(self, chat_input: Annotated[LanguageModelInput, "Chat Input"]) -> str:
+    def chat(self, chat_input: Annotated[ChatInput, "Chat Input"]) -> str:
         """
         Chat with the chat model
 
@@ -33,7 +72,4 @@ class ChatLLM:
         Returns:
             str: Chat output
         """
-        res = self.chat_model.invoke(input=chat_input)
-        if type(res.content) is str:
-            return res.content
-        return "\n".join([s for s in res.content if type(s) is str])
+        return self.chat_model.chat(chat_input)

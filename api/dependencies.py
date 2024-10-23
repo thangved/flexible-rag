@@ -1,7 +1,9 @@
 import chromadb
 import cohere
 from chromadb import Documents, EmbeddingFunction, Embeddings
-from langchain_cohere import ChatCohere
+
+from core.chat_llm import ChatLLMModel
+from core.models.chat import ChatMessage, ChatMessageRole
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
@@ -35,7 +37,7 @@ class CohereEmbeddingsFunction(EmbeddingFunction):
         return response.embeddings
 
 
-def get_cohere_embeddings() -> CohereEmbeddingsFunction:
+def get_embeddings_function() -> CohereEmbeddingsFunction:
     """
     Creates a Cohere embeddings function.
 
@@ -47,11 +49,42 @@ def get_cohere_embeddings() -> CohereEmbeddingsFunction:
     )
 
 
-def get_chat_model() -> ChatCohere:
+def transform_chat_message(chat_message: ChatMessage) -> dict:
+    """
+    Transforms a chat message to a dictionary.
+
+    Args:
+        chat_message (ChatMessage): Chat message
+
+    Returns:
+        dict: Chat message dictionary
+    """
+    role = "user"
+    if chat_message.role == ChatMessageRole.Ai:
+        role = "assistant"
+    if chat_message.role == ChatMessageRole.System:
+        role = "system"
+    return {
+        "role": role,
+        "content": chat_message.content,
+    }
+
+
+class CohereChatModel(ChatLLMModel):
+    """Cohere chat model."""
+
+    def chat(self, chat_input) -> str:
+        co = cohere.ClientV2(api_key=COHERE_API_KEY)
+        messages = [transform_chat_message(m) for m in chat_input.messages]
+        res = co.chat(messages=messages, model="command-r-plus-08-2024")
+        return res.message.content[0].text
+
+
+def get_chat_model() -> CohereChatModel:
     """
     Creates a chat model.
 
     Returns:
         ChatCohere: Chat model
     """
-    return ChatCohere()
+    return CohereChatModel()
