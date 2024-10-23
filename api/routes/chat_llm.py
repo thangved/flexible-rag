@@ -1,11 +1,9 @@
-from enum import Enum
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
 from core.chat_llm import ChatInput, ChatLLM
-from core.models.chat import ChatMessage, ChatMessageRole
 
 from ..dependencies import get_chat_model
 
