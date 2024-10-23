@@ -22,10 +22,7 @@ class Document(BaseModel):
 
 
 class VectorStore:
-    """
-    Vector store class
-
-    """
+    """Vector store class"""
 
     def __init__(
         self,

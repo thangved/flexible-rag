@@ -6,9 +6,9 @@ from httpx import ASGITransport, AsyncClient
 from api.dependencies import get_chroma_client, get_cohere_embeddings
 from api.main import app
 
-app.dependency_overrides[get_chroma_client] = lambda: chromadb.Client()
+app.dependency_overrides[get_chroma_client] = chromadb.Client
 app.dependency_overrides[get_cohere_embeddings] = (
-    lambda: embedding_functions.DefaultEmbeddingFunction()
+    embedding_functions.DefaultEmbeddingFunction
 )
 
 
