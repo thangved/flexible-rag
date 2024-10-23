@@ -7,18 +7,7 @@ import nanoid
 from chromadb.utils import embedding_functions
 from pydantic import BaseModel, Field
 
-
-class Document(BaseModel):
-    """
-    Document class
-
-    Attributes:
-        page_content (str): Page content
-        metadata (dict): Metadata
-    """
-
-    page_content: str = Field(..., title="Page content")
-    metadata: dict = Field({}, title="Metadata")
+from core.models.documents import Document
 
 
 class VectorStore:

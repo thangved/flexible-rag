@@ -4,6 +4,7 @@ import chromadb
 from fastapi import APIRouter, Depends, Response, status
 from pydantic import BaseModel, Field
 
+from core.models.documents import DocumentMetadata, DocumentWithScore
 from core.vector_store import VectorStore
 
 from ..dependencies import (
@@ -71,59 +72,6 @@ class AddDocumentResponse(BaseModel):
         description="A list of unique document IDs",
         title="Stored document IDs",
         examples=["Uj9uY4N41cpSZb0MHBY_w"],
-    )
-
-
-class DocumentWithScoreMetadata(BaseModel):
-    """
-    Metadata for Document with Score
-
-    Attributes:
-        reference_id (str): Reference ID
-    """
-
-    model_config = {
-        "title": "Document with Score Metadata",
-        "strict": True,
-    }
-    reference_id: str = Field(
-        ...,
-        title="Reference ID",
-        description="Reference ID",
-        examples=["1"],
-    )
-
-
-class DocumentWithScore(BaseModel):
-    """
-    Document with Score
-
-    Attributes:
-        page_content (str): Page content
-        metadata (DocumentWithScoreMetadata): Metadata
-        score (float): Score
-    """
-
-    model_config = {
-        "title": "Document with Score",
-        "strict": True,
-    }
-    page_content: str = Field(
-        ...,
-        title="Page content",
-        description="Page content",
-        examples=["Hoang Sa and Truong Sa belong to Vietnam"],
-    )
-    metadata: DocumentWithScoreMetadata = Field(
-        ...,
-        title="Metadata",
-        description="Metadata",
-    )
-    score: float = Field(
-        ...,
-        title="Score",
-        description="Score",
-        examples=[0.99],
     )
 
 
@@ -237,9 +185,7 @@ def similarity_search(
     return [
         DocumentWithScore(
             page_content=doc[0].page_content,
-            metadata=DocumentWithScoreMetadata(
-                reference_id=doc[0].metadata["reference_id"]
-            ),
+            metadata=doc[0].metadata,
             score=doc[1],
         )
         for doc in docs
