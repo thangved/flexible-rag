@@ -1,5 +1,9 @@
 import chromadb
-from langchain_cohere import ChatCohere, CohereEmbeddings
+import cohere
+from chromadb import Documents, EmbeddingFunction, Embeddings
+
+from core.chat_llm import ChatLLMModel
+from core.models.chat import ChatMessage, ChatMessageRole
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
@@ -22,24 +26,74 @@ def get_chroma_client() -> chromadb.Client:
     )
 
 
-def get_cohere_embeddings() -> CohereEmbeddings:
+class CohereEmbeddingsFunction(EmbeddingFunction):
+    """Cohere embeddings function."""
+
+    def __call__(self, input: Documents) -> Embeddings:
+        co = cohere.Client(api_key=COHERE_API_KEY)
+        response = co.embed(
+            texts=input, model="embed-multilingual-v2.0", input_type="search_document"
+        )
+        return response.embeddings
+
+
+def get_embeddings_function() -> CohereEmbeddingsFunction:
     """
     Creates a Cohere embeddings function.
 
     Returns:
         CohereEmbeddings: Cohere embeddings function
     """
-    return CohereEmbeddings(
+    return CohereEmbeddingsFunction(
         cohere_api_key=COHERE_API_KEY,
-        model="embed-multilingual-v3.0",
     )
 
 
-def get_chat_model() -> ChatCohere:
+def transform_chat_message(chat_message: ChatMessage) -> dict:
+    """
+    Transforms a chat message to a dictionary.
+
+    Args:
+        chat_message (ChatMessage): Chat message
+
+    Returns:
+        dict: Chat message dictionary
+    """
+    role = "user"
+    if chat_message.role == ChatMessageRole.Ai:
+        role = "assistant"
+    if chat_message.role == ChatMessageRole.System:
+        role = "system"
+    return {
+        "role": role,
+        "content": chat_message.content,
+    }
+
+
+class CohereChatModel(ChatLLMModel):
+    """Cohere chat model."""
+
+    def chat(self, chat_input) -> str:
+        """
+        Chat with the model.
+
+        Args:
+            chat_input: Chat input
+
+        Returns:
+            str: Chat response
+        """
+        co = cohere.ClientV2(api_key=COHERE_API_KEY)
+        messages = [transform_chat_message(m) for m in chat_input.messages]
+        res = co.chat(messages=messages, model="command-r-plus-08-2024")
+        return res.message.content[0].text
+
+
+def get_chat_model() -> CohereChatModel:
     """
     Creates a chat model.
 
     Returns:
         ChatCohere: Chat model
     """
-    return ChatCohere()
+    return CohereChatModel()
