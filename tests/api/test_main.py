@@ -3,9 +3,15 @@ import pytest
 from chromadb.utils import embedding_functions
 from httpx import ASGITransport, AsyncClient
 
-from api.dependencies import get_chat_model, get_chroma_client, get_embeddings_function
+from api.dependencies import (
+    get_chat_model,
+    get_chroma_client,
+    get_embeddings_function,
+    get_rerank_model,
+)
 from api.main import app
 from tests.fake.llm_chat import FakeLLMChatModel
+from tests.fake.rerank import FakeRerankModel
 
 
 def get_chroma_client_override():
@@ -20,9 +26,14 @@ def get_chat_model_override():
     return FakeLLMChatModel()
 
 
+def get_rerank_model_override():
+    return FakeRerankModel()
+
+
 app.dependency_overrides[get_chroma_client] = get_chroma_client_override
 app.dependency_overrides[get_embeddings_function] = get_embeddings_function_override
 app.dependency_overrides[get_chat_model] = get_chat_model_override
+app.dependency_overrides[get_rerank_model] = get_rerank_model_override
 
 
 @pytest.mark.anyio
@@ -92,3 +103,33 @@ async def test_chat():
         )
         assert response.status_code == 200
         assert type(response.json()["content"]) is str
+
+
+@pytest.mark.anyio
+async def test_rerank():
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac:
+        response = await ac.post(
+            "/rerank",
+            json={
+                "documents": [
+                    {
+                        "page_content": "Paris is the capital of France.",
+                        "metadata": {"reference_id": "1"},
+                    },
+                ],
+                "query": "Which country has the largest population?",
+            },
+        )
+        assert response.status_code == 200
+        response_json = response.json()
+        assert type(response_json) is dict
+        assert type(response_json["query"]) is str
+        assert type(response_json["documents"]) is list
+        assert len(response_json["documents"]) == 1
+        for doc in response_json["documents"]:
+            assert type(doc["score"]) is float
+            assert type(doc["page_content"]) is str
+            assert type(doc["metadata"]) is dict
+            assert type(doc["metadata"]["reference_id"]) is str
