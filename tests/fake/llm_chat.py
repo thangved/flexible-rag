@@ -2,9 +2,7 @@ from core.chat_llm import ChatLLMModel
 
 
 class FakeLLMChatModel(ChatLLMModel):
-    """
-    A fake chat model.
-    """
+    """A fake chat model."""
 
     def chat(self, chat_input) -> str:
         """
