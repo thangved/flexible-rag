@@ -1,4 +1,4 @@
-from core.chat_llm import ChatLLM, ChatLLMModel
+from core.chat_llm import ChatLLM
 from core.models.chat import ChatMessage, ChatMessageRole
 from tests.fake.llm_chat import FakeLLMChatModel
 
