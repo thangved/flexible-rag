@@ -16,6 +16,8 @@ langchain-core = "^0.3.12"
 langchain-chroma = ">=0.1.2"
 pydantic = "^2.9.2"
 langchain-cohere = "^0.3.1"
+chromadb = "^0.5.15"
+nanoid = "^2.0.0"
 
 
 [tool.poetry.group.test.dependencies]
@@ -27,6 +29,7 @@ trio = "^0.27.0"
 
 [tool.poetry.group.api.dependencies]
 fastapi = {extras = ["standard"], version = "^0.115.2"}
+cohere = "^5.11.1"
 
 [build-system]
 requires = ["poetry-core"]

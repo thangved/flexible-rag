@@ -8,19 +8,19 @@ vector_store = VectorStore(collection_name=collection_name)
 
 def test_create_vector_store_instance():
     vector_store = VectorStore(collection_name=collection_name)
-    assert vector_store.chroma._collection_name == collection_name
+    assert vector_store.collection.name == collection_name
 
 
 def test_add_documents():
-    doc_1 = Document(page_content="test content 1")
-    doc_2 = Document(page_content="test content 2")
+    docs_1 = ["test content 1"]
+    docs_2 = ["test content 2"]
 
     vector_store.add_documents(
-        [doc_1],
+        documents=docs_1,
         reference_id="1",
     )
     vector_store.add_documents(
-        [doc_2],
+        documents=docs_2,
         reference_id="2",
     )
 

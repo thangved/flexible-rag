@@ -1,17 +1,24 @@
-from typing import Annotated, Optional
+from typing import Annotated, Optional, Tuple
 
 import chromadb
+import chromadb.api
+import chromadb.api.client
+import nanoid
+from chromadb.utils import embedding_functions
 from langchain_chroma import Chroma
-from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings, FakeEmbeddings
+from pydantic import BaseModel, Field
+
+
+class Document(BaseModel):
+    page_content: str = Field(..., title="Page content")
+    metadata: dict = Field({}, title="Metadata")
 
 
 class VectorStore:
     """
     Vector store class
 
-    Attributes:
-        chroma (Chroma): Chroma instance
     """
 
     def __init__(
@@ -21,13 +28,13 @@ class VectorStore:
             "Collection name",
         ] = "default_collection",
         client: Annotated[
-            Optional[chromadb.Client],
+            Optional[chromadb.api.client.Client],
             "Chroma client",
-        ] = None,
+        ] = chromadb.Client(),
         embeddings: Annotated[
-            Optional[Embeddings],
+            Optional[chromadb.Embeddings],
             "Embeddings function",
-        ] = FakeEmbeddings(size=768),
+        ] = embedding_functions.DefaultEmbeddingFunction(),
     ):
         """
         Initialize the vector store
@@ -35,17 +42,14 @@ class VectorStore:
         Args:
             collection_name (str): Collection name
         """
-        self.chroma = Chroma(
-            collection_name=collection_name,
-            embedding_function=embeddings,
-            client=client,
-            collection_metadata={"hnsw:space": "cosine"},
+        self.collection = client.get_or_create_collection(
+            name=collection_name, embedding_function=embeddings
         )
 
     def add_documents(
         self,
         documents: Annotated[
-            list[Document],
+            list[str],
             "List of documents",
         ],
         reference_id: Annotated[
@@ -65,11 +69,23 @@ class VectorStore:
         Returns:
             list[str]: List of document IDs
         """
-        if reference_id is not None:
-            for doc in documents:
-                doc.metadata["reference_id"] = reference_id
-
-        return self.chroma.add_documents(documents=documents)
+        metadatas = (
+            [
+                {
+                    "reference_id": reference_id,
+                }
+                for _ in range(len(documents))
+            ]
+            if reference_id is not None
+            else [{} for _ in range(len(documents))]
+        )
+        ids = [nanoid.generate() for _ in range(len(documents))]
+        self.collection.add(
+            documents=documents,
+            ids=ids,
+            metadatas=metadatas,
+        )
+        return ids
 
     def similarity_search(
         self,
@@ -85,7 +101,7 @@ class VectorStore:
             int,
             "Number of result documents",
         ] = 3,
-    ) -> list[Document]:
+    ) -> list[Tuple[Document, float]]:
         """
         Search for similar documents
 
@@ -95,17 +111,24 @@ class VectorStore:
             k (int): Number of result documents
 
         Returns:
-            list[Document]: List of similar documents
+            list[Tuple[Document, float]]: List of documents and their similarity scores
         """
-        query_filter = (
-            {"reference_id": reference_id} if reference_id is not None else None
+        where = {"reference_id": reference_id} if reference_id is not None else None
+        res = self.collection.query(
+            query_texts=[query],
+            n_results=k,
+            where=where,
         )
-        docs_with_scores = self.chroma.similarity_search_with_score(
-            query=query,
-            k=k,
-            filter=query_filter,
-        )
-        return docs_with_scores
+        return [
+            (
+                Document(
+                    page_content=res["documents"][0][i],
+                    metadata=res["metadatas"][0][i],
+                ),
+                res["distances"][0][i],
+            )
+            for i in range(len(res["documents"][0]))
+        ]
 
     def delete_by_reference_id(
         self,
@@ -123,7 +146,4 @@ class VectorStore:
         Returns:
             None
         """
-        docs = self.chroma.get(where={"reference_id": reference_id})
-        ids = docs["ids"]
-        if len(ids) > 0:
-            self.chroma.delete(ids=docs["ids"])
+        self.collection.delete(where={"reference_id": reference_id})
