@@ -6,7 +6,11 @@ from pydantic import BaseModel, Field
 
 from core.vector_store import VectorStore
 
-from ..dependencies import CohereEmbeddings, get_chroma_client, get_cohere_embeddings
+from ..dependencies import (
+    CohereEmbeddingsFunction,
+    get_chroma_client,
+    get_cohere_embeddings,
+)
 
 router = APIRouter(
     dependencies=[
@@ -140,7 +144,7 @@ def create_document(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        CohereEmbeddings,
+        CohereEmbeddingsFunction,
         Depends(get_cohere_embeddings),
     ],
 ) -> Annotated[
@@ -187,7 +191,7 @@ def similarity_search(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        CohereEmbeddings,
+        CohereEmbeddingsFunction,
         Depends(get_cohere_embeddings),
     ],
     query: Annotated[
@@ -212,7 +216,7 @@ def similarity_search(
     Args:
         collection_name (str): Collection name
         chroma_client (chromadb.Client): Chroma client
-        cohere_embeddings (Embeddings): Embeddings function
+        cohere_embeddings (CohereEmbeddingsFunction): Embeddings function
         query (str): Query string
         k (int): Number of documents to return
         reference_id (str): Reference ID

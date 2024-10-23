@@ -24,7 +24,9 @@ def get_chroma_client() -> chromadb.Client:
     )
 
 
-class CohereEmbeddings(EmbeddingFunction):
+class CohereEmbeddingsFunction(EmbeddingFunction):
+    """Cohere embeddings function."""
+
     def __call__(self, input: Documents) -> Embeddings:
         co = cohere.Client(api_key=COHERE_API_KEY)
         response = co.embed(
@@ -33,14 +35,14 @@ class CohereEmbeddings(EmbeddingFunction):
         return response.embeddings
 
 
-def get_cohere_embeddings() -> CohereEmbeddings:
+def get_cohere_embeddings() -> CohereEmbeddingsFunction:
     """
     Creates a Cohere embeddings function.
 
     Returns:
         CohereEmbeddings: Cohere embeddings function
     """
-    return CohereEmbeddings(
+    return CohereEmbeddingsFunction(
         cohere_api_key=COHERE_API_KEY,
     )
 
