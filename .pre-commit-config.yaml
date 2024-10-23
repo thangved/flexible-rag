@@ -9,12 +9,13 @@ repos:
     rev: 24.10.0
     hooks:
       - id: black
-    args: [--enable-unstable-feature=string_processing "--preview"]
+        args: ["--enable-unstable-feature", "string_processing", "--preview"]
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
     hooks:
       - id: isort
         name: isort (python)
+        args: ["--profile", "black"]
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.21.1
     hooks:

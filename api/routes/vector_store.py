@@ -2,18 +2,20 @@ from typing import Annotated, List, Optional
 
 import chromadb
 from fastapi import APIRouter, Depends, Response, status
-from langchain_core.documents import Document
-from langchain_core.embeddings import Embeddings
 from pydantic import BaseModel, Field
 
 from core.vector_store import VectorStore
 
-from ..dependencies import get_chroma_client, get_cohere_embeddings
+from ..dependencies import (
+    CohereEmbeddingsFunction,
+    get_chroma_client,
+    get_embeddings_function,
+)
 
 router = APIRouter(
     dependencies=[
         Depends(get_chroma_client),
-        Depends(get_cohere_embeddings),
+        Depends(get_embeddings_function),
     ],
 )
 
@@ -68,7 +70,7 @@ class AddDocumentResponse(BaseModel):
         ...,
         description="A list of unique document IDs",
         title="Stored document IDs",
-        examples=["cab7e246-b777-4e8c-a88b-0ce9bd44e190"],
+        examples=["Uj9uY4N41cpSZb0MHBY_w"],
     )
 
 
@@ -142,8 +144,8 @@ def create_document(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        Embeddings,
-        Depends(get_cohere_embeddings),
+        CohereEmbeddingsFunction,
+        Depends(get_embeddings_function),
     ],
 ) -> Annotated[
     AddDocumentResponse,
@@ -166,7 +168,7 @@ def create_document(
         embeddings=cohere_embeddings,
     )
     ids = vector_store.add_documents(
-        [Document(page_content=document.content)],
+        [document.content],
         reference_id=document.reference_id,
     )
     return AddDocumentResponse(ids=ids)
@@ -189,8 +191,8 @@ def similarity_search(
         Depends(get_chroma_client),
     ],
     cohere_embeddings: Annotated[
-        Embeddings,
-        Depends(get_cohere_embeddings),
+        CohereEmbeddingsFunction,
+        Depends(get_embeddings_function),
     ],
     query: Annotated[
         str,
@@ -214,7 +216,7 @@ def similarity_search(
     Args:
         collection_name (str): Collection name
         chroma_client (chromadb.Client): Chroma client
-        cohere_embeddings (Embeddings): Embeddings function
+        cohere_embeddings (CohereEmbeddingsFunction): Embeddings function
         query (str): Query string
         k (int): Number of documents to return
         reference_id (str): Reference ID
