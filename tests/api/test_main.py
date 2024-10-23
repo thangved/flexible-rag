@@ -14,6 +14,13 @@ from tests.fake.llm_chat import FakeLLMChatModel
 from tests.fake.rerank import FakeRerankModel
 
 
+def test_dependencies():
+    assert get_chat_model() is not None
+    assert get_chroma_client() is not None
+    assert get_embeddings_function() is not None
+    assert get_rerank_model() is not None
+
+
 def get_chroma_client_override():
     return chromadb.Client()
 
