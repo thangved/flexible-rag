@@ -7,7 +7,9 @@ from api.dependencies import get_chroma_client, get_cohere_embeddings
 from api.main import app
 
 app.dependency_overrides[get_chroma_client] = chromadb.Client
-app.dependency_overrides[get_cohere_embeddings] = embedding_functions.DefaultEmbeddingFunction
+app.dependency_overrides[get_cohere_embeddings] = (
+    embedding_functions.DefaultEmbeddingFunction
+)
 
 
 @pytest.mark.anyio
