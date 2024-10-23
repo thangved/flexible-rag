@@ -4,7 +4,7 @@ import chromadb
 from fastapi import APIRouter, Depends, Response, status
 from pydantic import BaseModel, Field
 
-from core.models.documents import DocumentMetadata, DocumentWithScore
+from core.models.documents import DocumentWithScore
 from core.vector_store import VectorStore
 
 from ..dependencies import (

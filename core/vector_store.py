@@ -5,7 +5,6 @@ import chromadb.api
 import chromadb.api.client
 import nanoid
 from chromadb.utils import embedding_functions
-from pydantic import BaseModel, Field
 
 from core.models.documents import Document
 
