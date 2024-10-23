@@ -6,10 +6,17 @@ from httpx import ASGITransport, AsyncClient
 from api.dependencies import get_chroma_client, get_cohere_embeddings
 from api.main import app
 
-app.dependency_overrides[get_chroma_client] = chromadb.Client
-app.dependency_overrides[get_cohere_embeddings] = (
-    embedding_functions.DefaultEmbeddingFunction
-)
+
+def get_chroma_client_override():
+    return chromadb.Client()
+
+
+def get_cohere_embeddings_override():
+    return embedding_functions.DefaultEmbeddingFunction()
+
+
+app.dependency_overrides[get_chroma_client] = get_chroma_client_override
+app.dependency_overrides[get_cohere_embeddings] = get_cohere_embeddings_override
 
 
 @pytest.mark.anyio
