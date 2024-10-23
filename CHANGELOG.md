@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.0.0](https://github.com/thangved/flexible-rag/compare/v0.2.0...v1.0.0) (2024-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove using langchain in api/vector_store
+* remove using langchain in core/vector_store
+
+### Features
+
+* remove using langchain in api/vector_store ([4027718](https://github.com/thangved/flexible-rag/commit/402771891a57b445c963999fe85c1fc411e0a273))
+* remove using langchain in chat_llm modules ([a69f749](https://github.com/thangved/flexible-rag/commit/a69f749430888eaf61b02514f1a8a6598c083b4b))
+* remove using langchain in core/vector_store ([2fcb655](https://github.com/thangved/flexible-rag/commit/2fcb655534dff579df9c49ae92ad28c39189376f))
+
+
+### Bug Fixes
+
+* fix black conflict with isort ([1797220](https://github.com/thangved/flexible-rag/commit/17972208c7bbf86aafe81c4d6e6225f8ac5ef353))
+
+
+### Documentation
+
+* add docstring for CohereChatModel and FakeChatModel ([6c15b73](https://github.com/thangved/flexible-rag/commit/6c15b73e173607801ef643c7eff5481a03a1aa63))
+* add docstring for Document and CohereEmbeddingsFunction ([16a3564](https://github.com/thangved/flexible-rag/commit/16a3564a19e3e7895f96547b875e14da73db93e5))
+
 ## [0.2.0](https://github.com/thangved/flexible-rag/compare/v0.1.0...v0.2.0) (2024-10-22)
 
 
