@@ -74,6 +74,15 @@ class CohereChatModel(ChatLLMModel):
     """Cohere chat model."""
 
     def chat(self, chat_input) -> str:
+        """
+        Chat with the model.
+
+        Args:
+            chat_input: Chat input
+
+        Returns:
+            str: Chat response
+        """
         co = cohere.ClientV2(api_key=COHERE_API_KEY)
         messages = [transform_chat_message(m) for m in chat_input.messages]
         res = co.chat(messages=messages, model="command-r-plus-08-2024")
