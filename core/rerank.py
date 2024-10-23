@@ -6,6 +6,8 @@ from core.vector_store import Document
 
 
 class RerankModel(ABC):
+    """Rerank Model"""
+
     @abstractmethod
     def rerank(
         self,
@@ -24,7 +26,14 @@ class RerankModel(ABC):
 
 
 class Rerank:
+    """Rerank"""
+
     def __init__(self, model: Annotated[RerankModel, "Rerank model"]) -> None:
+        """
+        Initialize the rerank model
+        Args:
+            model (RerankModel): Rerank model
+        """
         self.model = model
 
     def rerank(
