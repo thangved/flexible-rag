@@ -53,7 +53,19 @@ class CohereChatModel(ChatLLMModel):
 
 
 class CohereRerankModel(RerankModel):
+    """Cohere rerank model."""
+
     def rerank_documents(self, query, docs):
+        """
+        Rerank the documents based on the query.
+
+        Args:
+            query: The query use to rerank
+            docs: List of documents
+
+        Returns:
+            List[float]: List of relevance scores
+        """
         res = co.rerank(documents=docs, query=query, model="rerank-multilingual-v2.0")
         sorted_index = sorted(res.results, key=lambda x: x.index)
         return [el.relevance_score for el in sorted_index]

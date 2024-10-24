@@ -11,6 +11,8 @@ router = APIRouter(dependencies=[Depends(get_rerank_model)])
 
 
 class RerankInput(BaseModel):
+    """Rerank Input"""
+
     model_config = {
         "title": "Rerank Input",
         "strict": True,
@@ -45,6 +47,8 @@ class RerankInput(BaseModel):
 
 
 class RerankOutput(BaseModel):
+    """Rerank Output"""
+
     model_config = {
         "title": "Rerank Output",
         "strict": True,
@@ -90,6 +94,16 @@ def rerank_documents(
     rerank_input: RerankInput,
     rerank_model: Annotated[RerankModel, Depends(get_rerank_model)],
 ) -> RerankOutput:
+    """
+    Rerank the documents based on the query
+
+    Args:
+        rerank_input (RerankInput): Rerank input
+        rerank_model (RerankModel): Rerank model
+
+    Returns:
+        RerankOutput: Rerank output
+    """
     rerank = Rerank(model=rerank_model)
     reranked_documents = rerank.rerank_documents(
         rerank_input.query, rerank_input.documents
