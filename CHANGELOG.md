@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/thangved/flexible-rag/compare/v1.1.0...v1.1.1) (2024-10-24)
+
+
+### Documentation
+
+* init mkdocs project ([6576b0c](https://github.com/thangved/flexible-rag/commit/6576b0ca101f6bf1b2ade86efb8ddf64da91ca1e))
+
 ## [1.1.0](https://github.com/thangved/flexible-rag/compare/v1.0.0...v1.1.0) (2024-10-24)
 
 
