@@ -93,4 +93,7 @@ extra:
       - reject
       - manage
 
+extra_css:
+  - stylesheets/extra.css
+
 copyright: Copyright &copy; 2024 Kim Minh Thắng
