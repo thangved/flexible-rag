@@ -1,0 +1,95 @@
+site_name: Flexible RAG
+site_url: https://flexiblerag.thangved.com
+repo_url: https://github.com/thangved/flexible-rag
+repo_name: thangved/flexible-rag
+remote_branch: gh-pages
+site_author: Kim Minh Thắng
+site_description: A flexible RAG for your project
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: en
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - header.autohide
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+  palette:
+    primary: black
+  font:
+    text: Montserrat
+    code: JetBrains Mono
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+
+nav:
+  - Home: index.md
+  - Blog:
+      - blog/index.md
+
+plugins:
+  - search
+  - tags
+  - blog
+  - rss:
+      match_path: blog/posts/.*
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
+      enabled: !ENV [CI, false]
+  - offline
+  - coverage
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/thangved
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/thangved
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/thangved
+  version:
+    provider: mike
+    default: stable
+    alias: true
+  analytics:
+    provider: google
+    property: G-GTY506MC92
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+    actions:
+      - accept
+      - reject
+      - manage
+
+copyright: Copyright &copy; 2024 Kim Minh Thắng
