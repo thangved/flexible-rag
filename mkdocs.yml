@@ -19,7 +19,7 @@ theme:
     - search.highlight
     - search.share
   palette:
-    primary: black
+    primary: white
   font:
     text: Montserrat
     code: JetBrains Mono
