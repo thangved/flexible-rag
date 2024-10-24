@@ -18,4 +18,8 @@ RUN poetry run pytest
 
 FROM install AS development
 
-CMD [ "poetry", "run", "fastapi", "dev", "api/main.py", "--host", "0.0.0.0", "--port", "8000" ]
+CMD [ "poetry", "run", "fastapi", "dev", "/app/api/main.py", "--host", "0.0.0.0", "--port", "8000" ]
+
+FROM install AS production
+
+CMD [ "poetry", "run", "fastapi", "run", "/app/api/main.py", "--host", "0.0.0.0", "--port", "8000" ]
