@@ -1,0 +1,35 @@
+comment:
+  layout: "header, diff, flags, components"
+
+component_management:
+  default_rules:
+    statuses:
+      - type: project
+        target: auto
+        branches:
+          - "!main"
+  individual_components:
+    - component_id: module_core
+      name: core
+      paths:
+        - core/**
+      statuses:
+        - type: project
+          target: auto
+        - type: patch
+    - component_id: module_api
+      name: api
+      paths:
+        - api/**
+      statuses:
+        - type: project
+          target: auto
+        - type: patch
+    - component_id: module_tests
+      name: tests
+      paths:
+        - tests/**
+      statuses:
+        - type: project
+          target: auto
+        - type: patch
