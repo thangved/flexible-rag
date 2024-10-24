@@ -1,0 +1,22 @@
+services:
+  chroma:
+    image: chromadb/chroma
+    container_name: flexible-rag-chroma-production
+
+  api:
+    container_name: flexible-rag-api-production
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app/api
+      - ./core:/app/core
+    environment:
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - COHERE_API_KEY=${COHERE_API_KEY}
+    depends_on:
+      - chroma

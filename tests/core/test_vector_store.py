@@ -40,7 +40,7 @@ def test_similarity_search():
         doc,
         score,
     ) in docs:
-        assert doc.metadata["reference_id"] in [
+        assert doc.metadata.reference_id in [
             "1",
             "2",
         ]
@@ -50,14 +50,14 @@ def test_similarity_search():
         doc,
         score,
     ) in docs_1:
-        assert doc.metadata["reference_id"] == "1"
+        assert doc.metadata.reference_id == "1"
         assert type(score) is float
 
     for (
         doc,
         score,
     ) in docs_2:
-        assert doc.metadata["reference_id"] == "2"
+        assert doc.metadata.reference_id == "2"
         assert type(score) is float
 
 

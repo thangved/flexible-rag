@@ -1,16 +1,74 @@
+from logging import getLogger
+
 import chromadb
 import cohere
 from chromadb import Documents, EmbeddingFunction, Embeddings
 
 from core.chat_llm import ChatLLMModel
 from core.models.chat import ChatMessage, ChatMessageRole
+from core.rerank import RerankModel
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
-print(f"COHERE_API_KEY: {len(COHERE_API_KEY) * '*'}")
+logger = getLogger(__name__)
 
-print(f"CHROMA_HOST: {CHROMA_HOST}")
-print(f"CHROMA_PORT: {CHROMA_PORT}")
+logger.info("===== DEPENDENCIES.PY =====")
+
+logger.info("COHERE_API_KEY: %s", len(COHERE_API_KEY) * "*")
+
+logger.info("CHROMA_HOST: %s", CHROMA_HOST)
+logger.info("CHROMA_PORT: %s", CHROMA_PORT)
+
+logger.info("===== DEPENDENCIES.PY =====")
+
+co = cohere.ClientV2(api_key=COHERE_API_KEY)
+
+
+class CohereEmbeddingsFunction(EmbeddingFunction):
+    """Cohere embeddings function."""
+
+    def __call__(self, input: Documents) -> Embeddings:
+        response = co.embed(
+            texts=input, model="embed-multilingual-v2.0", input_type="search_document"
+        )
+        return response.embeddings
+
+
+class CohereChatModel(ChatLLMModel):
+    """Cohere chat model."""
+
+    def chat(self, chat_input) -> str:
+        """
+        Chat with the model.
+
+        Args:
+            chat_input: Chat input
+
+        Returns:
+            str: Chat response
+        """
+        messages = [transform_chat_message(m) for m in chat_input.messages]
+        res = co.chat(messages=messages, model="command-r-plus-08-2024")
+        return res.message.content[0].text
+
+
+class CohereRerankModel(RerankModel):
+    """Cohere rerank model."""
+
+    def rerank_documents(self, query, docs):
+        """
+        Rerank the documents based on the query.
+
+        Args:
+            query: The query use to rerank
+            docs: List of documents
+
+        Returns:
+            List[float]: List of relevance scores
+        """
+        res = co.rerank(documents=docs, query=query, model="rerank-multilingual-v2.0")
+        sorted_index = sorted(res.results, key=lambda x: x.index)
+        return [el.relevance_score for el in sorted_index]
 
 
 def get_chroma_client() -> chromadb.Client:
@@ -20,21 +78,14 @@ def get_chroma_client() -> chromadb.Client:
     Returns:
         chromadb.Client: Chroma client
     """
-    return chromadb.HttpClient(
-        host=CHROMA_HOST,
-        port=CHROMA_PORT,
-    )
-
-
-class CohereEmbeddingsFunction(EmbeddingFunction):
-    """Cohere embeddings function."""
-
-    def __call__(self, input: Documents) -> Embeddings:
-        co = cohere.Client(api_key=COHERE_API_KEY)
-        response = co.embed(
-            texts=input, model="embed-multilingual-v2.0", input_type="search_document"
+    try:
+        return chromadb.HttpClient(
+            host=CHROMA_HOST,
+            port=CHROMA_PORT,
         )
-        return response.embeddings
+    except BaseException as e:
+        logger.error("Error creating Chroma client: %s", e)
+        return chromadb.Client()
 
 
 def get_embeddings_function() -> CohereEmbeddingsFunction:
@@ -70,25 +121,6 @@ def transform_chat_message(chat_message: ChatMessage) -> dict:
     }
 
 
-class CohereChatModel(ChatLLMModel):
-    """Cohere chat model."""
-
-    def chat(self, chat_input) -> str:
-        """
-        Chat with the model.
-
-        Args:
-            chat_input: Chat input
-
-        Returns:
-            str: Chat response
-        """
-        co = cohere.ClientV2(api_key=COHERE_API_KEY)
-        messages = [transform_chat_message(m) for m in chat_input.messages]
-        res = co.chat(messages=messages, model="command-r-plus-08-2024")
-        return res.message.content[0].text
-
-
 def get_chat_model() -> CohereChatModel:
     """
     Creates a chat model.
@@ -97,3 +129,13 @@ def get_chat_model() -> CohereChatModel:
         ChatCohere: Chat model
     """
     return CohereChatModel()
+
+
+def get_rerank_model() -> CohereRerankModel:
+    """
+    Creates a rerank model.
+
+    Returns:
+        CohereRerankModel: Rerank model
+    """
+    return CohereRerankModel()
