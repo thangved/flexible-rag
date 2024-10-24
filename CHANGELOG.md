@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/thangved/flexible-rag/compare/v1.1.3...v1.1.4) (2024-10-24)
+
+
+### Documentation
+
+* fix blog with ([4c2ccf7](https://github.com/thangved/flexible-rag/commit/4c2ccf7f399b8008db4b3c3bba7023e82a1e05da))
+
 ## [1.1.3](https://github.com/thangved/flexible-rag/compare/v1.1.2...v1.1.3) (2024-10-24)
 
 
