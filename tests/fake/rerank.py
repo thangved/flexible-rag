@@ -6,7 +6,7 @@ from core.rerank import RerankModel
 class FakeRerankModel(RerankModel):
     """Fake Rerank Model"""
 
-    def rerank(
+    def rerank_documents(
         self,
         query: str,
         docs: List[str],

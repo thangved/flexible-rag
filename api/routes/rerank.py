@@ -86,10 +86,12 @@ class RerankOutput(BaseModel):
     summary="Rerank the documents",
     response_description="List of documents with ranked score and sorted by score",
 )
-def rerank(
+def rerank_documents(
     rerank_input: RerankInput,
     rerank_model: Annotated[RerankModel, Depends(get_rerank_model)],
 ) -> RerankOutput:
     rerank = Rerank(model=rerank_model)
-    reranked_documents = rerank.rerank(rerank_input.query, rerank_input.documents)
+    reranked_documents = rerank.rerank_documents(
+        rerank_input.query, rerank_input.documents
+    )
     return RerankOutput(query=rerank_input.query, documents=reranked_documents)

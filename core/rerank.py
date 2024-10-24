@@ -9,7 +9,7 @@ class RerankModel(ABC):
     """Rerank Model"""
 
     @abstractmethod
-    def rerank(
+    def rerank_documents(
         self,
         query: Annotated[str, "The query use to rerank"],
         docs: Annotated[List[str], "List of documents"],
@@ -36,7 +36,7 @@ class Rerank:
         """
         self.model = model
 
-    def rerank(
+    def rerank_documents(
         self,
         query: Annotated[str, "The query use to rerank"],
         docs: Annotated[List[Document], "List of documents"],
@@ -53,7 +53,7 @@ class Rerank:
         Returns:
             List[DocumentWithScore]: List of documents with ranked score and sorted by score
         """
-        scores = self.model.rerank(query, [doc.page_content for doc in docs])
+        scores = self.model.rerank_documents(query, [doc.page_content for doc in docs])
         mapped_documents = [
             DocumentWithScore(
                 page_content=doc.page_content,

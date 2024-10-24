@@ -11,7 +11,7 @@ def test_create_rerank():
 def test_rerank_1():
     rerank = Rerank(model=FakeRerankModel())
     documents = []
-    reranked_documents = rerank.rerank("query", documents)
+    reranked_documents = rerank.rerank_documents("query", documents)
     assert type(reranked_documents) is list
     assert len(reranked_documents) == 0
 
@@ -36,7 +36,7 @@ def test_rerank_2():
             metadata=DocumentMetadata(reference_id="4"),
         ),
     ]
-    reranked_documents = rerank.rerank("query", documents)
+    reranked_documents = rerank.rerank_documents("query", documents)
     assert type(reranked_documents) is list
     assert len(reranked_documents) == 4
     assert reranked_documents[0].metadata.reference_id == "3"
