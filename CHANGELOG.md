@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/thangved/flexible-rag/compare/v1.1.1...v1.1.2) (2024-10-24)
+
+
+### Documentation
+
+* change logo ([7eb0298](https://github.com/thangved/flexible-rag/commit/7eb02984dd47d9d0acc29caa7cc1b4926d750db4))
+* update giscus config ([5280dc6](https://github.com/thangved/flexible-rag/commit/5280dc6175a06c897d752fa1564d7841829c62b1))
+
 ## [1.1.1](https://github.com/thangved/flexible-rag/compare/v1.1.0...v1.1.1) (2024-10-24)
 
 
