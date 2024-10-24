@@ -1530,13 +1530,13 @@ files = [
 
 [[package]]
 name = "mkdocs-rss-plugin"
-version = "1.15.0"
+version = "1.16.0"
 description = "MkDocs plugin which generates a static RSS feed using git log and page.meta."
 optional = false
-python-versions = "<4,>=3.8"
+python-versions = "<4,>=3.9"
 files = [
-    {file = "mkdocs_rss_plugin-1.15.0-py2.py3-none-any.whl", hash = "sha256:7308ac13f0976c0479db5a62cb7ef9b10fdd74b6521e459bb66a13e2cfe69d4b"},
-    {file = "mkdocs_rss_plugin-1.15.0.tar.gz", hash = "sha256:92995ed6c77b2ae1f5f2913e62282c27e50c35d618c4291b5b939e50badd7504"},
+    {file = "mkdocs_rss_plugin-1.16.0-py2.py3-none-any.whl", hash = "sha256:be66b11300f1e951d3393ce8da60ca6d730108f731434cc256670b3b8e0cffb3"},
+    {file = "mkdocs_rss_plugin-1.16.0.tar.gz", hash = "sha256:f0e275c933be69a77ee7af92256d88e2969e10c36c5ee1ecdb663a4ea4aa08ea"},
 ]
 
 [package.dependencies]
