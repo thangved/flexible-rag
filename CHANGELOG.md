@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/thangved/flexible-rag/compare/v1.0.0...v1.1.0) (2024-10-24)
+
+
+### Features
+
+* add core/rerank ([fab38c4](https://github.com/thangved/flexible-rag/commit/fab38c4ef5ed2e000b05b888af7ec72f829b8d6d))
+* implement api/rerank ([706e2eb](https://github.com/thangved/flexible-rag/commit/706e2ebd838a91e1428cd0b5ac44b9230bcec3ec))
+
+
+### Documentation
+
+* add missing docstring ([4503c5f](https://github.com/thangved/flexible-rag/commit/4503c5f62f1da3f38ba12df17dc1e84183428a96))
+
 ## [1.0.0](https://github.com/thangved/flexible-rag/compare/v0.2.0...v1.0.0) (2024-10-23)
 
 
