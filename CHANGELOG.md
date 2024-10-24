@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/thangved/flexible-rag/compare/v1.1.2...v1.1.3) (2024-10-24)
+
+
+### Documentation
+
+* update document config ([a05649f](https://github.com/thangved/flexible-rag/commit/a05649f67d5cfba1a8f7462f723eab8980cfc96e))
+
 ## [1.1.2](https://github.com/thangved/flexible-rag/compare/v1.1.1...v1.1.2) (2024-10-24)
 
 
