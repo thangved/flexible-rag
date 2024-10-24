@@ -14,10 +14,10 @@ logger = getLogger(__name__)
 
 logger.info("===== DEPENDENCIES.PY =====")
 
-logger.info(f"COHERE_API_KEY: {len(COHERE_API_KEY) * '*'}")
+logger.info("COHERE_API_KEY: %s", len(COHERE_API_KEY) * "*")
 
-logger.info(f"CHROMA_HOST: {CHROMA_HOST}")
-logger.info(f"CHROMA_PORT: {CHROMA_PORT}")
+logger.info("CHROMA_HOST: %s", CHROMA_HOST)
+logger.info("CHROMA_PORT: %s", CHROMA_PORT)
 
 logger.info("===== DEPENDENCIES.PY =====")
 
@@ -84,7 +84,7 @@ def get_chroma_client() -> chromadb.Client:
             port=CHROMA_PORT,
         )
     except BaseException as e:
-        logger.error(f"Error creating Chroma client: {e}")
+        logger.error("Error creating Chroma client: %s", e)
         return chromadb.Client()
 
 
