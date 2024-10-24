@@ -30,6 +30,7 @@ nav:
   - Home: index.md
   - Blog:
       - blog/index.md
+  - Coverage: coverage.md
 
 plugins:
   - search
