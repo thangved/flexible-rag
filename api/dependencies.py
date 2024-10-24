@@ -27,6 +27,7 @@ co = cohere.ClientV2(api_key=COHERE_API_KEY)
 class CohereEmbeddingsFunction(EmbeddingFunction):
     """Cohere embeddings function."""
 
+    # skipcq: PYL-W0622
     def __call__(self, input: Documents) -> Embeddings:
         response = co.embed(
             texts=input, model="embed-multilingual-v2.0", input_type="search_document"
