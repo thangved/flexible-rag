@@ -1,3 +1,5 @@
+from logging import getLogger
+
 import chromadb
 import cohere
 from chromadb import Documents, EmbeddingFunction, Embeddings
@@ -8,14 +10,16 @@ from core.rerank import RerankModel
 
 from .config import CHROMA_HOST, CHROMA_PORT, COHERE_API_KEY
 
-print("===== DEPENDENCIES.PY =====")
+logger = getLogger(__name__)
 
-print(f"COHERE_API_KEY: {len(COHERE_API_KEY) * '*'}")
+logger.info("===== DEPENDENCIES.PY =====")
 
-print(f"CHROMA_HOST: {CHROMA_HOST}")
-print(f"CHROMA_PORT: {CHROMA_PORT}")
+logger.info(f"COHERE_API_KEY: {len(COHERE_API_KEY) * '*'}")
 
-print("===== DEPENDENCIES.PY =====")
+logger.info(f"CHROMA_HOST: {CHROMA_HOST}")
+logger.info(f"CHROMA_PORT: {CHROMA_PORT}")
+
+logger.info("===== DEPENDENCIES.PY =====")
 
 co = cohere.ClientV2(api_key=COHERE_API_KEY)
 
@@ -67,7 +71,8 @@ def get_chroma_client() -> chromadb.Client:
             host=CHROMA_HOST,
             port=CHROMA_PORT,
         )
-    except:
+    except BaseException as e:
+        logger.error(f"Error creating Chroma client: {e}")
         return chromadb.Client()
 
 
