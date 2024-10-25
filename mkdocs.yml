@@ -39,7 +39,6 @@ nav:
   - Home: index.md
   - Blog:
       - blog/index.md
-  - Coverage: coverage.md
   - Changelog:
       - changelog.md
 
@@ -59,8 +58,10 @@ plugins:
         - tags
       enabled: !ENV [CI, false]
   - offline
-  - coverage
-  - git-authors
+  - git-committers:
+      repository: thangved/flexible-rag
+      branch: main
+
 
 markdown_extensions:
   - pymdownx.highlight:
