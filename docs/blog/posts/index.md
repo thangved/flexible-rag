@@ -4,6 +4,8 @@ categories:
   - Example category
 tags:
   - Example tag
+authors:
+  - thangved
 ---
 
 # Example post

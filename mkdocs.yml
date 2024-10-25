@@ -5,6 +5,7 @@ repo_name: thangved/flexible-rag
 remote_branch: gh-pages
 site_author: Kim Minh Thắng
 site_description: A flexible RAG for your project
+
 theme:
   name: material
   custom_dir: docs/overrides
@@ -13,11 +14,19 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.instant.progress
+    - navigation.tabs
+    - navigation.expand
+    - navigation.path
+    - navigation.prune
+    - navigation.indexes
+    - navigation.top
     - header.autohide
     - navigation.footer
     - search.suggest
     - search.highlight
     - search.share
+    - toc.follow
+    - toc.integrate
   palette:
     primary: white
   font:
@@ -30,12 +39,16 @@ nav:
   - Home: index.md
   - Blog:
       - blog/index.md
-  - Coverage: coverage.md
+  - API:
+      - RESTful API: api/restful.md
 
 plugins:
   - search
   - tags
-  - blog
+  - blog:
+      enabled: true
+      archive_toc: true
+      authors: true
   - rss:
       match_path: docs/blog/posts/.*
       date_from_meta:
@@ -45,7 +58,18 @@ plugins:
         - tags
       enabled: !ENV [CI, false]
   - offline
-  - coverage
+  - git-committers:
+      repository: thangved/flexible-rag
+      branch: main
+  - git-revision-date-localized
+  - mkdocs_github_changelog
+  - minify:
+      minify_html: true
+      minify_css: true
+      minify_js: true
+  - swagger-ui-tag
+  - autorefs
+  - mike
 
 markdown_extensions:
   - pymdownx.highlight:
