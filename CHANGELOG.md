@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.5](https://github.com/thangved/flexible-rag/compare/v1.1.4...v1.1.5) (2024-10-25)
+
+
+### Bug Fixes
+
+* change Dockerfile to exclude installing documentation dependencies ([842de17](https://github.com/thangved/flexible-rag/commit/842de1709d285b25968424e946cbc83b455853c3))
+* install another version for mkdocs-git-authors-plugin ([0654c4f](https://github.com/thangved/flexible-rag/commit/0654c4f34085a34aa9f64ceee059c9fdda57d410))
+
+
+### Documentation
+
+* update document ([170f371](https://github.com/thangved/flexible-rag/commit/170f37167f15769ca638595a5421fe9aec260e9c))
+
 ## [1.1.4](https://github.com/thangved/flexible-rag/compare/v1.1.3...v1.1.4) (2024-10-24)
 
 
