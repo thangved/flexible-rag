@@ -50,7 +50,6 @@ plugins:
       enabled: true
       archive_toc: true
       authors: true
-      authors_profiles: true
   - rss:
       match_path: docs/blog/posts/.*
       date_from_meta:

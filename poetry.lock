@@ -1493,14 +1493,18 @@ name = "mkdocs-git-authors-plugin"
 version = "0.9.0"
 description = "Mkdocs plugin to display git authors of a page"
 optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "mkdocs_git_authors_plugin-0.9.0-py3-none-any.whl", hash = "sha256:380730a05eeb947a7e84be05fdb1c5ae2a7bc70fd9f6eda941f187c87ae37052"},
-    {file = "mkdocs_git_authors_plugin-0.9.0.tar.gz", hash = "sha256:6161f63b87064481a48d9ad01c23e43c3e758930c3a9cc167fe482909ceb9eac"},
-]
+python-versions = ">=3.8"
+files = []
+develop = false
 
 [package.dependencies]
 mkdocs = ">=1.0"
+
+[package.source]
+type = "git"
+url = "ssh://git@github.com/thangved/mkdocs-git-authors-plugin"
+reference = "HEAD"
+resolved_reference = "1d133c9985f6cf573fae9472520eb8b9e728c99d"
 
 [[package]]
 name = "mkdocs-material"
@@ -3628,4 +3632,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "9c048cd208e8f8b7f748b11525608347c354108334b52fe5692074063b5a0e95"
+content-hash = "2cb4a10afffc53549b3cd2d5e2ee4f9b6fdd5ff12f5096fe48c515b781a22802"
