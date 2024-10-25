@@ -17,6 +17,13 @@ app = FastAPI(
     title="Flexible RAG API",
     summary="Flexible RAG API",
     version="0.1.0",
+    servers=[
+        {"url": "http://localhost:8000/api/v1", "description": "Local server"},
+        {
+            "url": "https://flexragapidemo.thangved.com/api/v1",
+            "description": "Demo server",
+        },
+    ],
 )
 
 
