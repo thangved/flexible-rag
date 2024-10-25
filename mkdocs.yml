@@ -39,8 +39,8 @@ nav:
   - Home: index.md
   - Blog:
       - blog/index.md
-  - Changelog:
-      - changelog.md
+  - API:
+      - RESTful API: api/restful.md
 
 plugins:
   - search
@@ -61,7 +61,15 @@ plugins:
   - git-committers:
       repository: thangved/flexible-rag
       branch: main
-
+  - git-revision-date-localized
+  - mkdocs_github_changelog
+  - minify:
+      minify_html: true
+      minify_css: true
+      minify_js: true
+  - swagger-ui-tag
+  - autorefs
+  - mike
 
 markdown_extensions:
   - pymdownx.highlight:
