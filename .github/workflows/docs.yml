@@ -25,7 +25,7 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install poetry
-      - run: poetry install
-      - run: poetry install fastapi
+      - run: poetry install --with docs
+      - run: poetry add fastapi
       - run: poetry run python build_openapi.py
       - run: poetry run mkdocs gh-deploy --force
