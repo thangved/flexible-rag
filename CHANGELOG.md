@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.6](https://github.com/thangved/flexible-rag/compare/v1.1.5...v1.1.6) (2024-10-25)
+
+
+### Bug Fixes
+
+* fix ci command ([03942ad](https://github.com/thangved/flexible-rag/commit/03942ad72e4a97a11ca4067ca469c9e969ea486a))
+
 ## [1.1.5](https://github.com/thangved/flexible-rag/compare/v1.1.4...v1.1.5) (2024-10-25)
 
 
