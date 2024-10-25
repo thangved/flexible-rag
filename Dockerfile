@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install
+RUN poetry install --without docs
 
 FROM install AS test
 
