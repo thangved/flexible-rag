@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.7](https://github.com/thangved/flexible-rag/compare/v1.1.6...v1.1.7) (2024-10-26)
+
+
+### Bug Fixes
+
+* fix missing embedding_types ([1d386fe](https://github.com/thangved/flexible-rag/commit/1d386feff3f1074f8be448bf5b66c2c248374353))
+
+
+### Documentation
+
+* update document ([a360e1e](https://github.com/thangved/flexible-rag/commit/a360e1e7cd9e783f953294371a83371d18fa385b))
+
 ## [1.1.6](https://github.com/thangved/flexible-rag/compare/v1.1.5...v1.1.6) (2024-10-25)
 
 
