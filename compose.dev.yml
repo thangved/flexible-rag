@@ -2,6 +2,8 @@ services:
   chroma:
     image: chromadb/chroma
     container_name: flexible-rag-chroma-dev
+    volumes:
+      - chroma:/chroma/chroma
 
   api:
     container_name: flexible-rag-api-dev

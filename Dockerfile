@@ -22,4 +22,6 @@ CMD [ "poetry", "run", "fastapi", "dev", "/app/api/main.py", "--host", "0.0.0.0"
 
 FROM install AS production
 
+COPY . .
+
 CMD [ "poetry", "run", "fastapi", "run", "/app/api/main.py", "--host", "0.0.0.0", "--port", "8000" ]
