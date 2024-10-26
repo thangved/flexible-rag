@@ -30,9 +30,12 @@ class CohereEmbeddingsFunction(EmbeddingFunction):
     # skipcq: PYL-W0622
     def __call__(self, input: Documents) -> Embeddings:
         response = co.embed(
-            texts=input, model="embed-multilingual-v2.0", input_type="search_document"
+            texts=input,
+            model="embed-multilingual-v2.0",
+            input_type="search_document",
+            embedding_types=["float"],
         )
-        return response.embeddings
+        return response.embeddings.float_
 
 
 class CohereChatModel(ChatLLMModel):
