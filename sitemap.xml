@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://flexiblerag.thangved.com/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/api/restful.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/blog/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/blog/2024/10/24/example-post.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/blog/archive/2024.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/blog/category/example-category.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+</urlset>
