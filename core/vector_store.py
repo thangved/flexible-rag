@@ -32,7 +32,8 @@ class VectorStore:
 
         Args:
             collection_name (str): Collection name
-            @rtype: object
+            client (chromadb.api.client.Client): ChromaDB client
+            embeddings (chromadb.Embeddings): Embeddings function
         """
         self.collection = client.get_or_create_collection(
             name=collection_name,
@@ -59,6 +60,7 @@ class VectorStore:
 
         Args:
             documents (list[Document]): List of documents
+            reference_id (str): Reference id
 
         Returns:
             list[str]: List of document IDs

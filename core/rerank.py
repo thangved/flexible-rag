@@ -16,12 +16,13 @@ class RerankModel(ABC):
     ) -> Annotated[List[float], "List of scores for each document"]:
         """
         Rerank the documents based on the query
+
         Args:
             query (str): The query use to rerank
             docs (List[str]): List of documents
 
-            Returns:
-                List[float]: List of relevance scores
+        Returns:
+            List[float]: List of relevance scores
         """
 
 
@@ -31,6 +32,7 @@ class Rerank:
     def __init__(self, model: Annotated[RerankModel, "Rerank model"]) -> None:
         """
         Initialize the rerank model
+
         Args:
             model (RerankModel): Rerank model
         """
@@ -46,12 +48,13 @@ class Rerank:
     ]:
         """
         Rerank the documents based on the query
+
         Args:
             query (str): The query use to rerank
-            docs (List[Document]): List of documents
+            docs (List[core.models.documents.Document]): List of documents
 
         Returns:
-            List[DocumentWithScore]: List of documents and sorted by score
+            List[core.models.documents.DocumentWithScore]: List of documents and sorted by score
         """
         scores = self.model.rerank_documents(query, [doc.page_content for doc in docs])
         mapped_documents = [

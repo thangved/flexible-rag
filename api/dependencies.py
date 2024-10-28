@@ -1,4 +1,5 @@
 from logging import getLogger
+from typing import List, Optional
 
 import chromadb
 import cohere
@@ -28,7 +29,16 @@ class CohereEmbeddingsFunction(EmbeddingFunction):
     """Cohere embeddings function."""
 
     # skipcq: PYL-W0622
-    def __call__(self, input: Documents) -> Embeddings:
+    def __call__(self, input: Documents) -> Optional[list[list[float]]]:
+        """
+        Call embeddings
+
+        Args:
+              input (Documents): embeddings input
+
+        Returns:
+            Optional[list[list[float]]: Embeddings output
+        """
         response = co.embed(
             texts=input,
             model="embed-multilingual-v2.0",
@@ -46,7 +56,7 @@ class CohereChatModel(ChatLLMModel):
         Chat with the model.
 
         Args:
-            chat_input: Chat input
+            chat_input (core.models.chat.ChatInput): Chat input
 
         Returns:
             str: Chat response
@@ -59,13 +69,13 @@ class CohereChatModel(ChatLLMModel):
 class CohereRerankModel(RerankModel):
     """Cohere rerank model."""
 
-    def rerank_documents(self, query, docs):
+    def rerank_documents(self, query, docs) -> list[float]:
         """
         Rerank the documents based on the query.
 
         Args:
-            query: The query use to rerank
-            docs: List of documents
+            query (str): The query use to rerank
+            docs (list[str]): List of documents
 
         Returns:
             List[float]: List of relevance scores
