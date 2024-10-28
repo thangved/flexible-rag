@@ -22,3 +22,6 @@ services:
       - COHERE_API_KEY=${COHERE_API_KEY}
     depends_on:
       - chroma
+
+volumes:
+  chroma:

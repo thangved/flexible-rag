@@ -71,9 +71,11 @@ async def test_similarity_search():
         )
         assert response.status_code == 200
         res_json = response.json()
-        assert type(res_json) is list
-        assert len(res_json) > 0
-        for doc in res_json:
+        assert type(res_json) is dict
+        assert type(res_json["query"]) is str
+        assert type(res_json["documents"]) is list
+        assert len(res_json["documents"]) > 0
+        for doc in res_json["documents"]:
             assert type(doc["score"]) is float
             assert type(doc["page_content"]) is str
             assert type(doc["metadata"]) is dict
