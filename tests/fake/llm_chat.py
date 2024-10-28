@@ -9,7 +9,7 @@ class FakeLLMChatModel(ChatLLMModel):
         Chat with the model.
 
         Args:
-            chat_input: Chat input (not used)
+            chat_input (core.chat_llm.ChatInput): Chat input (not used)
 
         Returns:
             str: A fake chat response
