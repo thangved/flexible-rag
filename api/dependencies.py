@@ -3,7 +3,7 @@ from typing import List, Optional
 
 import chromadb
 import cohere
-from chromadb import Documents, EmbeddingFunction, Embeddings
+from chromadb import Documents, EmbeddingFunction
 
 from core.chat_llm import ChatLLMModel
 from core.models.chat import ChatMessage, ChatMessageRole

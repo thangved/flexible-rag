@@ -51,10 +51,10 @@ class Rerank:
 
         Args:
             query (str): The query use to rerank
-            docs (List[core.models.documents.Document]): List of documents
+            docs (List[Document]): List of documents
 
         Returns:
-            List[core.models.documents.DocumentWithScore]: List of documents and sorted by score
+            List[DocumentWithScore]: List of documents and sorted by score
         """
         scores = self.model.rerank_documents(query, [doc.page_content for doc in docs])
         mapped_documents = [
