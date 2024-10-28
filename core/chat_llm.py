@@ -22,12 +22,7 @@ class ChatInput(BaseModel):
 
 
 class ChatLLMModel(ABC):
-    """
-    Chat with a language model
-
-    Attributes:
-        chat_model (BaseChatModel): A chat model
-    """
+    """Chat with a language model"""
 
     @abstractmethod
     def chat(self, chat_input: Annotated[ChatInput, "Chat Input"]) -> str:
@@ -35,7 +30,7 @@ class ChatLLMModel(ABC):
         Chat with the chat model
 
         Args:
-            chat_input (LanguageModelInput): Chat input
+            chat_input (ChatInput): Chat input
 
         Returns:
             str: Chat output
