@@ -80,6 +80,35 @@ async def test_similarity_search():
             assert type(doc["page_content"]) is str
             assert type(doc["metadata"]) is dict
             assert type(doc["metadata"]["reference_id"]) is str
+            assert doc["reference"] is None
+
+
+@pytest.mark.anyio
+async def test_similarity_search_with_reference_callback():
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac:
+        response = await ac.get(
+            "/vector_store",
+            params={
+                "query": "Hoàng Sa",
+                "collection_name": "geography",
+                "reference_callback": "http://test/reference_test/{reference_id}",
+            },
+        )
+        assert response.status_code == 200
+        res_json = response.json()
+        assert type(res_json) is dict
+        assert type(res_json["query"]) is str
+        assert type(res_json["documents"]) is list
+        assert len(res_json["documents"]) > 0
+        for doc in res_json["documents"]:
+            assert type(doc["score"]) is float
+            assert type(doc["page_content"]) is str
+            assert type(doc["metadata"]) is dict
+            assert type(doc["metadata"]["reference_id"]) is str
+            assert type(doc["reference"]) is dict
+            assert doc["reference"]["id"] == doc["metadata"]["reference_id"]
 
 
 @pytest.mark.anyio

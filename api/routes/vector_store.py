@@ -1,8 +1,9 @@
-from typing import Annotated, List, Optional, Tuple
+from typing import Annotated, Optional, Tuple
 
 import chromadb
+import httpx
 import requests
-from fastapi import APIRouter, Depends, Response, requests, status
+from fastapi import APIRouter, Depends, Response, status
 from pydantic import BaseModel, Field
 
 from core.models.documents import Document, DocumentWithScore
@@ -12,6 +13,7 @@ from ..dependencies import (
     CohereEmbeddingsFunction,
     get_chroma_client,
     get_embeddings_function,
+    logger,
 )
 
 router = APIRouter(
@@ -200,6 +202,7 @@ def similarity_search(
         query (str): Query string
         k (int): Number of documents to return
         reference_id (str): Reference ID
+        reference_callback (str): Reference callback url
 
     Returns:
         SimilaritySearchResponse: Similarity Search Response
@@ -231,9 +234,16 @@ def similarity_search(
             score=doc[1],
         )
         if reference_callback is not None:
-            mapped_document.reference = requests.get(
-                reference_callback.format(reference_id=doc[0].metadata.reference_id)
-            ).json()
+            try:
+                mapped_document.reference = httpx.get(
+                    url=reference_callback.format(
+                        reference_id=doc[0].metadata.reference_id
+                    ),
+                    timeout=1,
+                ).json()
+            except BaseException as e:
+                logger.warning("Call reference_callback error: %s", e)
+                mapped_document.reference = {"id": doc[0].metadata.reference_id}
         return mapped_document
 
     documents = list(map(map_documents, result_documents))
