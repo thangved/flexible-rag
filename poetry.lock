@@ -1799,13 +1799,13 @@ test = ["feedparser (>=6.0.11,<6.1)", "jsonfeed-util (>=1.1.2,<2)", "mkdocs-mate
 
 [[package]]
 name = "mkdocs-swagger-ui-tag"
-version = "0.6.10"
+version = "0.6.11"
 description = "A MkDocs plugin supports for add Swagger UI in page."
 optional = false
 python-versions = "*"
 files = [
-    {file = "mkdocs-swagger-ui-tag-0.6.10.tar.gz", hash = "sha256:811d55e0905bfecc5f2e743b5b1e4d03b663707d5472984cc7b21f45117dcb29"},
-    {file = "mkdocs_swagger_ui_tag-0.6.10-py3-none-any.whl", hash = "sha256:839373498a42202b3824068064919ad6ddf2e98d5a8deed7d4132719221c0528"},
+    {file = "mkdocs_swagger_ui_tag-0.6.11-py3-none-any.whl", hash = "sha256:eb7e0d6e14c793ec3430a6916dff6d8d1a0b3fd88ac6e909fa493f218685d12f"},
+    {file = "mkdocs_swagger_ui_tag-0.6.11.tar.gz", hash = "sha256:31681821d7f56a38379eb793abb3e035595df2043732a7db28e357dca2a0d566"},
 ]
 
 [package.dependencies]
