@@ -17,6 +17,70 @@
          <lastmod>2024-10-28</lastmod>
     </url>
     <url>
+         <loc>https://flexiblerag.thangved.com/reference/SUMMARY.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/config.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/dependencies.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/main.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/routes/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/routes/chat_llm.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/routes/rerank.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/api/routes/vector_store.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/chat_llm.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/rerank.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/vector_store.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/models/index.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/models/chat.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
+         <loc>https://flexiblerag.thangved.com/reference/core/models/documents.html</loc>
+         <lastmod>2024-10-28</lastmod>
+    </url>
+    <url>
          <loc>https://flexiblerag.thangved.com/blog/archive/2024.html</loc>
          <lastmod>2024-10-28</lastmod>
     </url>
