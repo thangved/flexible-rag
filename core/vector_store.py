@@ -32,6 +32,7 @@ class VectorStore:
 
         Args:
             collection_name (str): Collection name
+            @rtype: object
         """
         self.collection = client.get_or_create_collection(
             name=collection_name,
