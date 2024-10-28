@@ -2,7 +2,6 @@ from typing import Annotated, Optional, Tuple
 
 import chromadb
 import httpx
-import requests
 from fastapi import APIRouter, Depends, Response, status
 from pydantic import BaseModel, Field
 
