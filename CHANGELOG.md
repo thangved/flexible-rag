@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/thangved/flexible-rag/compare/v1.1.7...v2.0.0) (2024-10-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* add reference_callback feature
+
+### Features
+
+* add reference_callback feature ([bb8dedb](https://github.com/thangved/flexible-rag/commit/bb8dedbf890c4a0713b55914a67c098bf8e3b1fa))
+
+
+### Documentation
+
+* add reference docs ([f5ec088](https://github.com/thangved/flexible-rag/commit/f5ec088eeb43112bfa98913cb50f49665784f86a))
+
 ## [1.1.7](https://github.com/thangved/flexible-rag/compare/v1.1.6...v1.1.7) (2024-10-26)
 
 
