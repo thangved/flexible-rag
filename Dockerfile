@@ -1,4 +1,4 @@
-FROM python:3.9.20-slim-bookworm AS base
+FROM python:3.13.0-slim-bookworm AS base
 
 RUN pip install poetry
 
