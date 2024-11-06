@@ -474,13 +474,13 @@ numpy = "*"
 
 [[package]]
 name = "chromadb"
-version = "0.5.17"
+version = "0.5.18"
 description = "Chroma."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "chromadb-0.5.17-py3-none-any.whl", hash = "sha256:d1403b9f78678effdc42240759041272b4ead013ab205a16f656da923e542cae"},
-    {file = "chromadb-0.5.17.tar.gz", hash = "sha256:6d744dbab036d48d83c2425d3459006022dbcbe9e428affb011c72c91af04a39"},
+    {file = "chromadb-0.5.18-py3-none-any.whl", hash = "sha256:9dd3827b5e04b4ff0a5ea0df28a78bac88a09f45be37fcd7fe20f879b57c43cf"},
+    {file = "chromadb-0.5.18.tar.gz", hash = "sha256:cfbb3e5aeeb1dd532b47d80ed9185e8a9886c09af41c8e6123edf94395d76aec"},
 ]
 
 [package.dependencies]
@@ -1761,13 +1761,13 @@ mkdocs = ">=1.0.3"
 
 [[package]]
 name = "mkdocs-material"
-version = "9.5.43"
+version = "9.5.44"
 description = "Documentation that simply works"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mkdocs_material-9.5.43-py3-none-any.whl", hash = "sha256:4aae0664c456fd12837a3192e0225c17960ba8bf55d7f0a7daef7e4b0b914a34"},
-    {file = "mkdocs_material-9.5.43.tar.gz", hash = "sha256:83be7ff30b65a1e4930dfa4ab911e75780a3afc9583d162692e434581cb46979"},
+    {file = "mkdocs_material-9.5.44-py3-none-any.whl", hash = "sha256:47015f9c167d58a5ff5e682da37441fc4d66a1c79334bfc08d774763cacf69ca"},
+    {file = "mkdocs_material-9.5.44.tar.gz", hash = "sha256:f3a6c968e524166b3f3ed1fb97d3ed3e0091183b0545cedf7156a2a6804c56c0"},
 ]
 
 [package.dependencies]
