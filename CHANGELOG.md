@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/thangved/flexible-rag/compare/v2.0.1...v2.1.0) (2024-11-08)
+
+
+### Features
+
+* add telegram bot ([6afb216](https://github.com/thangved/flexible-rag/commit/6afb2167bbfa73eb2195310cd16be0593019ae4c))
+* use markdown format ([9a656e9](https://github.com/thangved/flexible-rag/commit/9a656e9a11b5c45c4aadb78fdc3fec19e7f90a12))
+
 ## [2.0.1](https://github.com/thangved/flexible-rag/compare/v2.0.0...v2.0.1) (2024-10-30)
 
 
