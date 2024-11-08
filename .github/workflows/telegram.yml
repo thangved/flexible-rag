@@ -13,8 +13,9 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
           message: |
-            ${{ github.actor }} created commit:
+            **${{ github.actor }}** created commit:
 
             - Commit message: ${{ github.event.head_commit.message }}
             - Repository: ${{ github.repository }}
@@ -30,8 +31,9 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
           message: |
-            ${{ github.actor }} created pull request:
+            **${{ github.actor }}** created pull request:
 
             - Pull request title: ${{ github.event.pull_request.title }}
             - Pull request body: ${{ github.event.pull_request.body }}
