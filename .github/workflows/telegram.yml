@@ -1,0 +1,40 @@
+name: Telegram Bot
+
+on: [push, pull_request]
+
+jobs:
+  send-push:
+    name: Send Telegram message for push event
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+
+            - Commit message: ${{ github.event.head_commit.message }}
+            - Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+  send-pull-request:
+    name: Send Telegram message for pull_request event
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created pull request:
+
+            - Pull request title: ${{ github.event.pull_request.title }}
+            - Pull request body: ${{ github.event.pull_request.body }}
+            - Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}
