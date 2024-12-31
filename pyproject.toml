@@ -13,7 +13,7 @@ python = "^3.9"
 
 [tool.poetry.group.core.dependencies]
 pydantic = "^2.9.2"
-chromadb = "^0.5.15"
+chromadb = "^0.6.0"
 nanoid = "^2.0.0"
 
 
