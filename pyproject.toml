@@ -13,14 +13,14 @@ python = "^3.9"
 
 [tool.poetry.group.core.dependencies]
 pydantic = "^2.9.2"
-chromadb = "^0.5.15"
+chromadb = "^0.6.0"
 nanoid = "^2.0.0"
 
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.3"
 pytest-cov = "^6.0.0"
-trio = "^0.27.0"
+trio = "^0.28.0"
 
 
 
