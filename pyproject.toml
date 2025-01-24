@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flexible-rag"
-version = "2.1.0"
+version = "2.1.1"
 description = "Flexible RAG"
 authors = ["Kim Minh Thang <thangved02@gmail.com>"]
 license = "MIT"

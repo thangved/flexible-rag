@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/thangved/flexible-rag/compare/v2.1.0...v2.1.1) (2025-01-24)
+
+
+### Bug Fixes
+
+* Dockerfile to reduce vulnerabilities ([5f2b150](https://github.com/thangved/flexible-rag/commit/5f2b150a7c06700f41fb3d900d29e3f695ecc18a))
+
 ## [2.1.0](https://github.com/thangved/flexible-rag/compare/v2.0.1...v2.1.0) (2024-11-08)
 
 
