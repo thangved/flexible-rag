@@ -5,14 +5,15 @@ description = "Flexible RAG"
 authors = [{ name = "Kim Minh Thang", email = "contact@thangved.com" }]
 license = "MIT"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = []
 
 [dependency-groups]
-core = [
-    "nanoid>=2.0.0",
-    "pydantic>=2.10.6",
+api = [
+    "cohere>=5.13.12",
+    "fastapi>=0.115.9",
 ]
+core = ["chromadb>=0.6.3", "nanoid>=2.0.0", "pydantic>=2.10.6"]
 docs = [
     "mike>=2.1.3",
     "mkdocs-autorefs>=1.4.0",
@@ -29,11 +30,7 @@ docs = [
     "mkdocs-swagger-ui-tag>=0.6.11",
     "mkdocstrings-python>=1.16.2",
 ]
-test = [
-    "pytest>=8.3.4",
-    "pytest-cov>=6.0.0",
-    "trio>=0.29.0",
-]
+test = ["pytest>=8.3.4", "pytest-cov>=6.0.0", "trio>=0.29.0"]
 
 [tool.uv.sources]
 mkdocs-git-authors-plugin = { git = "https://github.com/thangved/mkdocs-git-authors-plugin.git" }
