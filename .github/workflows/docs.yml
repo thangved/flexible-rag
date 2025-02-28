@@ -17,10 +17,6 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - uses: actions/setup-python@v5
-        name: Setup Python
-        with:
-          python-version: 3.x
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
         name: Setup cache
       - uses: actions/cache@v4
@@ -30,13 +26,13 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install poetry
-        name: Install poetry
-      - run: poetry install --with docs
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen --group docs
         name: Install packages
-      - run: poetry add fastapi
+      - run: uv add fastapi
         name: Install FastAPI
-      - run: poetry run python build_openapi.py
+      - run: uv run python build_openapi.py
         name: Buidl API docs
-      - run: poetry run mkdocs gh-deploy --force
+      - run: uv run mkdocs gh-deploy --force
         name: Deploy
