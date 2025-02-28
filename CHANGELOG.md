@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/thangved/flexible-rag/compare/v2.1.0...v2.1.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* **ci:** fix build docs error ([7e9a531](https://github.com/thangved/flexible-rag/commit/7e9a53193c65f5426b388bcc7289b034792fda1c))
+* **docs:** fixed mkdocstrings-python version ([d2f847d](https://github.com/thangved/flexible-rag/commit/d2f847d546cece31415416aca9881c4e66fe5b9f))
+* **github-actions:** groups to group ([31ea60d](https://github.com/thangved/flexible-rag/commit/31ea60d92419cfdb60a052d7b19afb0867cdd110))
+
 ## [2.1.0](https://github.com/thangved/flexible-rag/compare/v2.0.1...v2.1.0) (2024-11-08)
 
 
