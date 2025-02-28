@@ -1,6 +1,6 @@
 [project]
 name = "flexible-rag"
-version = "2.1.0"
+version = "2.1.1"
 description = "Flexible RAG"
 authors = [{ name = "Kim Minh Thang", email = "contact@thangved.com" }]
 license = "MIT"
