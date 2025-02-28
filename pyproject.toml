@@ -25,7 +25,7 @@ docs = [
     "mkdocs-minify-plugin>=0.8.0",
     "mkdocs-rss-plugin>=1.17.1",
     "mkdocs-swagger-ui-tag>=0.6.11",
-    "mkdocstrings-python==1.12.2",
+    "mkdocstrings-python==1.16.2",
 ]
 test = ["pytest>=8.3.4", "pytest-cov>=6.0.0", "trio>=0.29.0"]
 
