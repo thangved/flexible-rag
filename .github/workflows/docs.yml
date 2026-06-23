@@ -19,7 +19,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
         name: Setup cache
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         name: Use cache
         with:
           key: mkdocs-material-${{ env.cache_id }}
